@@ -1,5 +1,5 @@
 package sistema_biblioteca;
 
-public class usuarioBasico {
+public class usuarioBasico extends Usuario {
 
 }
