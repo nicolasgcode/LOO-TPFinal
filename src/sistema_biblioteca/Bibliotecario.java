@@ -15,8 +15,8 @@ public class Bibliotecario extends Usuario {
 
 	}
 
-	public void gestionarUsuario() {
-
-	}
+//	public void gestionarUsuario() {
+//
+//	}
 
 }

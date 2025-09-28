@@ -2,12 +2,12 @@ package sistema_biblioteca;
 
 public abstract class Usuario {
 
-	String nombre;
-	String apellido;
-	String mail;
-	String psw;
-	String estado;
-	Prestamo prestamo[];
+	private String nombre;
+	private String apellido;
+	private String mail;
+	private String psw;
+	private String estado;
+	private Prestamo prestamos[];
 
 	public Usuario(String nombre, String apellido, String mail, String psw, String estado) {
 		super();
@@ -56,6 +56,10 @@ public abstract class Usuario {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public Prestamo[] getPrestamos() {
+		return prestamos;
 	}
 
 }

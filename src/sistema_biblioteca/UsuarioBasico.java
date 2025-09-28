@@ -1,8 +1,8 @@
 package sistema_biblioteca;
 
-public class usuarioBasico extends Usuario {
+public class UsuarioBasico extends Usuario {
 
-	public usuarioBasico(String nombre, String apellido, String mail, String psw, String estado) {
+	public UsuarioBasico(String nombre, String apellido, String mail, String psw, String estado) {
 		super(nombre, apellido, mail, psw, estado);
 
 	}

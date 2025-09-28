@@ -7,48 +7,45 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class VentanaLogin extends JFrame implements ActionListener {
 
 	private JPanel mainPanel = new JPanel();
-	private JPanel northDivPanel = new JPanel();
 	private JPanel loginPanel = new JPanel();
 	private JPanel btnPanel = new JPanel();
-	private JPanel eastDivPanel = new JPanel();
-	private JPanel westDivPanel = new JPanel();
 
-	private JTextField usernameTxf = new JTextField();
-	private JTextField passwordTxf = new JTextField();
+	private JTextField mailTxf = new JTextField();
+	private JPasswordField pswTxf = new JPasswordField();
 
 	public VentanaLogin() {
 		setSize(400, 300);
 		setTitle("Sistema de gestión para biblioteca");
 		setLocationRelativeTo(null);
-		createLoginView();
+		createLoginPanel();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 	}
 
-	public void createLoginView() {
+	public void createLoginPanel() {
 
-		mainPanel.setLayout(new BorderLayout(10, 50));
+		mainPanel.setLayout(new BorderLayout(60, 50));
 
 		loginPanel.setLayout(new GridLayout(3, 2, 10, 10));
 
-		newLabel(loginPanel, "Usuario");
-		loginPanel.add(usernameTxf);
-		newLabel(loginPanel, "Contrasenia");
-		loginPanel.add(passwordTxf);
+		Factory.newLabel(loginPanel, "Mail");
+		loginPanel.add(mailTxf);
+		Factory.newLabel(loginPanel, "Contraseña");
+		loginPanel.add(pswTxf);
 
-		JButton loginBtn = newButton(btnPanel, "Iniciar sesión", "login");
+		JButton loginBtn = Factory.newButton(btnPanel, "Iniciar sesión", "login", this);
 		btnPanel.add(loginBtn);
 
-		mainPanel.add(northDivPanel, BorderLayout.NORTH);
-		mainPanel.add(eastDivPanel, BorderLayout.EAST);
-		mainPanel.add(westDivPanel, BorderLayout.WEST);
+		mainPanel.add(Factory.newPanel(), BorderLayout.NORTH);
+		mainPanel.add(Factory.newPanel(), BorderLayout.EAST);
+		mainPanel.add(Factory.newPanel(), BorderLayout.WEST);
 
 		mainPanel.add(loginPanel, BorderLayout.CENTER);
 
@@ -62,32 +59,18 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("login")) {
 
-			VentanaUsuario ventanaUsuario = new VentanaUsuario();
+			Usuario usuario = Validator.userExists(mailTxf.getText(), pswTxf.getPassword(), this);
 
-			ventanaUsuario.setVisible(true);
+			if (usuario != null) {
+				VentanaUsuario ventanaUsuario = new VentanaUsuario(usuario);
+
+				this.setVisible(false);
+
+				ventanaUsuario.setVisible(true);
+
+			}
 
 		}
-
-	}
-
-	private void newLabel(JPanel panel, String text) {
-		JLabel label = new JLabel();
-		label.setText(text);
-		panel.add(label);
-	}
-
-	private JButton newButton(JPanel panel, String text, String command) {
-
-		JButton btn = new JButton();
-		btn.setText(text);
-		btn.setActionCommand(command);
-
-		btn.setEnabled(true);
-		panel.add(btn);
-
-		btn.addActionListener(this);
-
-		return btn;
 
 	}
 
