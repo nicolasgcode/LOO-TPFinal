@@ -36,6 +36,7 @@ public class VentanaLibros extends JFrame implements ActionListener {
 	private JTextField tituloTxf = new JTextField();
 	private JTextField autorTxf = new JTextField();
 	private JTextField edicionTxf = new JTextField();
+	private JTextField prestamoTxf = new JTextField();
 
 	public VentanaLibros(Usuario usuario, VentanaUsuario ventana) {
 		this.usuario = usuario;
@@ -58,6 +59,8 @@ public class VentanaLibros extends JFrame implements ActionListener {
 
 	public void showPanelLibros() {
 
+		cargaBtnPanel.setLayout(new GridLayout(2, 2, 10, 10));
+
 		List<Libro> librosDisponibles = new ArrayList<Libro>();
 
 		if (usuario instanceof UsuarioBasico usuario) {
@@ -73,6 +76,13 @@ public class VentanaLibros extends JFrame implements ActionListener {
 
 		JPanel librosPanel = new JPanel(new BorderLayout());
 		librosPanel.add(scrollPane, BorderLayout.CENTER);
+
+		Factory.newLabel(cargaBtnPanel, "ISBN a alquilar");
+		cargaBtnPanel.add(prestamoTxf);
+		cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Realizar prestamo", "realizarprestamo", this));
+		cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Salir", "salir", this));
+
+		librosPanel.add(cargaBtnPanel, BorderLayout.SOUTH);
 
 		mainPanel.add(librosPanel, "librospanel");
 
@@ -140,6 +150,14 @@ public class VentanaLibros extends JFrame implements ActionListener {
 
 			} else {
 				JOptionPane.showMessageDialog(this, "No tienes permiso para cargar un libro");
+			}
+
+		} else if (e.getActionCommand().equals("realizarprestamo")) {
+
+			if (usuario instanceof UsuarioBasico usuario) {
+
+				usuario.realizarPrestamo(prestamoTxf.getText(), usuario, this);
+
 			}
 
 		}

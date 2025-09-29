@@ -1,17 +1,19 @@
 package sistema_biblioteca;
 
+import java.time.LocalDate;
+
 public class Prestamo {
 
-	Usuario usuario;
-	Libro libro;
-	String fechaInicio;
-	int diasPrestamo;
+	private Usuario usuario;
+	private Libro libro;
+	private LocalDate fechaInicio;
+	private LocalDate fechaFin;
 
-	public Prestamo(Usuario usuario, Libro libro, String fechaInicio, int diasPrestamo) {
+	public Prestamo(Usuario usuario, Libro libro) {
 		this.usuario = usuario;
 		this.libro = libro;
-		this.fechaInicio = fechaInicio;
-		this.diasPrestamo = diasPrestamo;
+		this.fechaInicio = LocalDate.now();
+		this.fechaFin = LocalDate.now().plusDays(7);
 	}
 
 	public Usuario getUsuario() {
@@ -30,20 +32,16 @@ public class Prestamo {
 		this.libro = libro;
 	}
 
-	public String getFechaInicio() {
+	public LocalDate getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio(String fechaInicio) {
+	public LocalDate getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaInicio(LocalDate fechaInicio) {
 		this.fechaInicio = fechaInicio;
-	}
-
-	public int getDiasPrestamo() {
-		return diasPrestamo;
-	}
-
-	public void setDiasPrestamo(int diasPrestamo) {
-		this.diasPrestamo = diasPrestamo;
 	}
 
 }

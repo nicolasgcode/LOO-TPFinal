@@ -23,8 +23,20 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 	JPanel menuUsuario = new JPanel();
 	JPanel panelBibliotecario = new JPanel();
 	JPanel menuBibliotecario = new JPanel();
+	private VentanaLogin ventana;
 
 	public VentanaUsuario(Usuario usuario, VentanaLogin ventana) {
+		this.ventana = ventana;
+		this.usuario = usuario;
+		setSize(400, 300);
+		setTitle("Panel de usuario");
+		setLocationRelativeTo(ventana);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		showUserPanel(usuario);
+
+	}
+
+	public VentanaUsuario(Usuario usuario) {
 		this.usuario = usuario;
 		setSize(400, 300);
 		setTitle("Panel de usuario");
@@ -93,6 +105,11 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 			VentanaLibros ventanaLibros = new VentanaLibros(usuario, this);
 			this.setVisible(false);
 			ventanaLibros.setVisible(true);
+		} else if (e.getActionCommand().equals("getprestamos")) {
+			VentanaPrestamos ventanaPrestamos = new VentanaPrestamos(usuario, this);
+			this.setVisible(false);
+			ventanaPrestamos.setVisible(true);
+
 		}
 
 	}

@@ -1,5 +1,8 @@
 package sistema_biblioteca;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Usuario {
 
 	private String nombre;
@@ -7,7 +10,7 @@ public abstract class Usuario {
 	private String mail;
 	private String psw;
 	private String estado;
-	private Prestamo prestamos[];
+	private List<Prestamo> prestamos = new ArrayList<Prestamo>();
 
 	public Usuario(String nombre, String apellido, String mail, String psw, String estado) {
 		super();
@@ -58,7 +61,7 @@ public abstract class Usuario {
 		this.estado = estado;
 	}
 
-	public Prestamo[] getPrestamos() {
+	public List<Prestamo> getPrestamos() {
 		return prestamos;
 	}
 
