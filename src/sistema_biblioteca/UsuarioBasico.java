@@ -20,7 +20,7 @@ public class UsuarioBasico extends Usuario {
 
 		for (Libro libro : repositorioLibros) {
 
-			if (libro.getEstado().equalsIgnoreCase("disponible")) {
+			if (libro.getEstado().equals(EstadoLibro.DISPONIBLE)) {
 
 				librosDisponibles.add(libro);
 

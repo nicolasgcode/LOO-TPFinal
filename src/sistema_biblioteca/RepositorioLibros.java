@@ -9,31 +9,16 @@ public class RepositorioLibros {
 
 	static {
 
-		libros.add(new Libro("0000000000001", "El Quijote", "Miguel de Cervantes", "1ª", "Disponible"));
-		libros.add(new Libro("0000000000002", "Crimen y Castigo", "Fiódor Dostoyevski", "2ª", "Prestado"));
-		libros.add(new Libro("1114458349022", "1984", "George Orwell", "3ª", "Disponible"));
-		libros.add(new Libro("978-0-7432-7356-5", "El Código Da Vinci", "Dan Brown", "1ª", "Disponible"));
-		libros.add(new Libro("978-0-06-112008-4", "Matar a un ruiseñor", "Harper Lee", "4ª", "Prestado"));
-		libros.add(new Libro("978-0-307-27778-0", "Los Pilares de la Tierra", "Ken Follett", "2ª", "Disponible"));
-		libros.add(new Libro("978-0-452-28425-8", "Fahrenheit 451", "Ray Bradbury", "3ª", "Disponible"));
-		libros.add(new Libro("978-0-375-70368-2", "El Alquimista", "Paulo Coelho", "1ª", "Prestado"));
-		libros.add(new Libro("978-0-7432-7357-2", "Ángeles y Demonios", "Dan Brown", "2ª", "Disponible"));
-		libros.add(
-				new Libro("978-84-376-0494-7", "Cien años de soledad", "Gabriel García Márquez", "5ª", "Disponible"));
-		libros.add(new Libro("978-0-452-28425-8", "Fahrenheit 451", "Ray Bradbury", "3ª", "Disponible"));
-
-		libros.add(new Libro("0000000000001", "El Quijote", "Miguel de Cervantes", "1ª", "Disponible"));
-		libros.add(new Libro("0000000000002", "Crimen y Castigo", "Fiódor Dostoyevski", "2ª", "Prestado"));
-		libros.add(new Libro("1114458349022", "1984", "George Orwell", "3ª", "Disponible"));
-		libros.add(new Libro("978-0-7432-7356-5", "El Código Da Vinci", "Dan Brown", "1ª", "Disponible"));
-		libros.add(new Libro("978-0-06-112008-4", "Matar a un ruiseñor", "Harper Lee", "4ª", "Prestado"));
-		libros.add(new Libro("978-0-307-27778-0", "Los Pilares de la Tierra", "Ken Follett", "2ª", "Disponible"));
-		libros.add(new Libro("978-0-452-28425-8", "Fahrenheit 451", "Ray Bradbury", "3ª", "Disponible"));
-		libros.add(new Libro("978-0-375-70368-2", "El Alquimista", "Paulo Coelho", "1ª", "Prestado"));
-		libros.add(new Libro("978-0-7432-7357-2", "Ángeles y Demonios", "Dan Brown", "2ª", "Disponible"));
-		libros.add(
-				new Libro("978-84-376-0494-7", "Cien años de soledad", "Gabriel García Márquez", "5ª", "Disponible"));
-		libros.add(new Libro("978-0-452-28425-8", "Fahrenheit 451", "Ray Bradbury", "3ª", "Disponible"));
+		libros.add(new Libro("0000000000001", "El Quijote", "Miguel de Cervantes", "1", "Disponible"));
+		libros.add(new Libro("0000000000002", "Cien Años de Soledad", "Gabriel García Márquez", "1", "Prestado"));
+		libros.add(new Libro("0000000000003", "Don Juan Tenorio", "José Zorrilla", "2", "Reservado"));
+		libros.add(new Libro("0000000000004", "La Sombra del Viento", "Carlos Ruiz Zafón", "1", "Disponible"));
+		libros.add(new Libro("0000000000005", "El Principito", "Antoine de Saint-Exupéry", "3", "No disponible"));
+		libros.add(new Libro("0000000000006", "1984", "George Orwell", "1", "Disponible"));
+		libros.add(new Libro("0000000000007", "Crimen y Castigo", "Fiódor Dostoyevski", "2", "Prestado"));
+		libros.add(new Libro("0000000000008", "Hamlet", "William Shakespeare", "1", "Disponible"));
+		libros.add(new Libro("0000000000009", "Orgullo y Prejuicio", "Jane Austen", "1", "Reservado"));
+		libros.add(new Libro("0000000000010", "Moby Dick", "Herman Melville", "1", "Disponible"));
 
 	}
 

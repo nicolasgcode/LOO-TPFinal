@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -31,6 +32,7 @@ public class VentanaLibros extends JFrame implements ActionListener {
 	private JPanel cargaLibroPanel = new JPanel();
 
 	private JPanel cargaBtnPanel = new JPanel();
+	JComboBox<EstadoLibro> comboEstado = new JComboBox<>(EstadoLibro.values());
 
 	private JTextField ISBNTxf = new JTextField();
 	private JTextField tituloTxf = new JTextField();
@@ -61,26 +63,26 @@ public class VentanaLibros extends JFrame implements ActionListener {
 
 	public void showPanelLibros() {
 
-		cargaBtnPanel.setLayout(new GridLayout(2, 2, 10, 10));
-
 		List<Libro> libros = new ArrayList<Libro>();
 
 		if (usuario instanceof UsuarioBasico usuario) {
 
 			libros = usuario.consultarLibrosDisp();
+			cargaBtnPanel.setLayout(new GridLayout(2, 2, 10, 10));
 			Factory.newLabel(cargaBtnPanel, "Libro a alquilar");
 			cargaBtnPanel.add(prestamoTxf);
 			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Realizar prestamo", "realizarprestamo", this));
 			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Salir", "salir", this));
 
-		} else {
+		} else if (usuario instanceof Bibliotecario) {
 
 			libros = RepositorioLibros.getLibros();
+			cargaBtnPanel.setLayout(new GridLayout(2, 3, 10, 10));
 			Factory.newLabel(cargaBtnPanel, "Libro a modificar");
 			cargaBtnPanel.add(ISBNModTxf);
-			Factory.newLabel(cargaBtnPanel, "Estado");
-			cargaBtnPanel.add(estadoTxf);
 			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Modificar libro", "modificarlibro", this));
+			Factory.newLabel(cargaBtnPanel, "Estado");
+			cargaBtnPanel.add(comboEstado);
 			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Salir", "salir", this));
 
 		}
@@ -175,7 +177,7 @@ public class VentanaLibros extends JFrame implements ActionListener {
 
 			if (usuario instanceof Bibliotecario bibliotecario) {
 
-				bibliotecario.gestionarLibro(ISBNModTxf.getText(), estadoTxf.getText(), table);
+				bibliotecario.gestionarLibro(ISBNModTxf.getText(), (EstadoLibro) comboEstado.getSelectedItem(), table);
 
 			}
 

@@ -6,7 +6,7 @@ public class Libro {
 	private String titulo;
 	private String autor;
 	private String edicion;
-	private String estado = "disponible";
+	private EstadoLibro estado;
 
 	public Libro(String iSBN, String titulo, String autor, String edicion, String estado) {
 		super();
@@ -14,7 +14,7 @@ public class Libro {
 		this.titulo = titulo;
 		this.autor = autor;
 		this.edicion = edicion;
-		this.estado = estado;
+		this.estado = EstadoLibro.DISPONIBLE;
 	}
 
 	public String getISBN() {
@@ -49,11 +49,11 @@ public class Libro {
 		this.edicion = edicion;
 	}
 
-	public String getEstado() {
+	public EstadoLibro getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(EstadoLibro estado) {
 		this.estado = estado;
 	}
 

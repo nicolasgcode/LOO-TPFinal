@@ -17,25 +17,30 @@ public class Bibliotecario extends Usuario {
 
 		if (!exists) {
 
-			Libro nuevoLibro = new Libro(ISBN, titulo, autor, edicion, "Disponible");
+			if (RepositorioLibros.getLibros().size() < 20) {
 
-			try {
+				Libro nuevoLibro = new Libro(ISBN, titulo, autor, edicion, "Disponible");
 
-				RepositorioLibros.getLibros().add(nuevoLibro);
-				exito = true;
-				JOptionPane.showMessageDialog(ventanaLibros, "Libro cargado con éxito");
+				try {
 
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(ventanaLibros, "Error al cargar el libro" + e.getMessage());
+					RepositorioLibros.getLibros().add(nuevoLibro);
+					exito = true;
+					JOptionPane.showMessageDialog(ventanaLibros, "Libro cargado con éxito");
+
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(ventanaLibros, "Error al cargar el libro" + e.getMessage());
+				}
+
+			} else {
+				JOptionPane.showMessageDialog(ventanaLibros, "Se ha alcanzado la cantidad máxima de libros");
 			}
-
 		}
 
 		return exito;
 
 	}
 
-	public void gestionarLibro(String ISBN, String estado, JTable table) {
+	public void gestionarLibro(String ISBN, EstadoLibro estado, JTable table) {
 
 		Libro libro = RepositorioLibros.getLibroByISBN(ISBN);
 

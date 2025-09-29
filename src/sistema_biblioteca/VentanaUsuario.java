@@ -62,7 +62,7 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 		panelUsuario.add(menuUsuario, BorderLayout.CENTER);
 
 		panelBibliotecario.setLayout(new BorderLayout(10, 50));
-		menuBibliotecario.setLayout(new GridLayout(2, 1, 10, 10));
+		menuBibliotecario.setLayout(new GridLayout(3, 1, 10, 10));
 		Factory.newButton(menuBibliotecario, "Prestamos realizados", "getprestamos", this);
 		Factory.newButton(menuBibliotecario, "Cargar Libro", "createlibro", this);
 		Factory.newButton(menuBibliotecario, "Modificar Libro", "updatelibro", this);
