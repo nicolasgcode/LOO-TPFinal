@@ -14,6 +14,8 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 
 	CardLayout cardLayout = new CardLayout();
 
+	private Usuario usuario;
+
 	JPanel mainPanel = new JPanel(cardLayout);
 	JPanel panelTitulo = new JPanel();
 	JPanel panelSalir = new JPanel();
@@ -22,10 +24,11 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 	JPanel panelBibliotecario = new JPanel();
 	JPanel menuBibliotecario = new JPanel();
 
-	public VentanaUsuario(Usuario usuario) {
+	public VentanaUsuario(Usuario usuario, VentanaLogin ventana) {
+		this.usuario = usuario;
 		setSize(400, 300);
 		setTitle("Panel de usuario");
-		setLocationRelativeTo(null);
+		setLocationRelativeTo(ventana);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		showUserPanel(usuario);
 
@@ -85,8 +88,11 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 			VentanaLogin ventanaLogin = new VentanaLogin();
 			ventanaLogin.setVisible(true);
 
-		} else if (e.getActionCommand().equals("getlibros")) {
+		} else if (e.getActionCommand().equals("getlibros") || e.getActionCommand().equals("createlibro")) {
 
+			VentanaLibros ventanaLibros = new VentanaLibros(e.getActionCommand(), usuario, this);
+			this.setVisible(false);
+			ventanaLibros.setVisible(true);
 		}
 
 	}

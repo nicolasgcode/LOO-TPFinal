@@ -62,7 +62,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 			Usuario usuario = Validator.userExists(mailTxf.getText(), pswTxf.getPassword(), this);
 
 			if (usuario != null) {
-				VentanaUsuario ventanaUsuario = new VentanaUsuario(usuario);
+				VentanaUsuario ventanaUsuario = new VentanaUsuario(usuario, this);
 
 				this.setVisible(false);
 

@@ -6,7 +6,7 @@ public class Libro {
 	private String titulo;
 	private String autor;
 	private String edicion;
-	private String estado;
+	private String estado = "disponible";
 
 	public Libro(String iSBN, String titulo, String autor, String edicion, String estado) {
 		super();
