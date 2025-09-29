@@ -90,7 +90,7 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 
 		} else if (e.getActionCommand().equals("getlibros") || e.getActionCommand().equals("createlibro")) {
 
-			VentanaLibros ventanaLibros = new VentanaLibros(e.getActionCommand(), usuario, this);
+			VentanaLibros ventanaLibros = new VentanaLibros(usuario, this);
 			this.setVisible(false);
 			ventanaLibros.setVisible(true);
 		}

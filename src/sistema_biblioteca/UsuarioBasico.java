@@ -30,7 +30,10 @@ public class UsuarioBasico extends Usuario {
 
 	}
 
-	public void realizarPrestamo() {
+	public void realizarPrestamo(String ISBN) {
+
+		Libro miLibro = RepositorioLibros.getLibroByISBN(ISBN);
+
 	}
 
 }

@@ -28,4 +28,17 @@ public class RepositorioLibros {
 		return libros;
 	}
 
+	public static Libro getLibroByISBN(String ISBN) {
+		for (Libro libro : libros) {
+
+			if (libro.getISBN().equals(ISBN)) {
+
+				return libro;
+
+			}
+
+		}
+		return null;
+	}
+
 }

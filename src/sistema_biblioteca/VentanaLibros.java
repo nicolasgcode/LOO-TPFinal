@@ -37,20 +37,18 @@ public class VentanaLibros extends JFrame implements ActionListener {
 	private JTextField autorTxf = new JTextField();
 	private JTextField edicionTxf = new JTextField();
 
-	public VentanaLibros(String command, Usuario usuario, VentanaUsuario ventana) {
+	public VentanaLibros(Usuario usuario, VentanaUsuario ventana) {
 		this.usuario = usuario;
 		setSize(400, 300);
 		setTitle("Panel de libros");
 		setLocationRelativeTo(ventana);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		System.out.println(command);
-
-		if (command.equals("getlibros")) {
+		if (usuario instanceof UsuarioBasico) {
 
 			showPanelLibros();
 
-		} else if (command.equals("createlibro")) {
+		} else {
 
 			showPanelCargaLibro();
 
