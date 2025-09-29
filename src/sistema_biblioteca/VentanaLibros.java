@@ -37,19 +37,21 @@ public class VentanaLibros extends JFrame implements ActionListener {
 	private JTextField autorTxf = new JTextField();
 	private JTextField edicionTxf = new JTextField();
 	private JTextField prestamoTxf = new JTextField();
+	private JTextField ISBNModTxf = new JTextField();
+	private JTextField estadoTxf = new JTextField();
 
-	public VentanaLibros(Usuario usuario, VentanaUsuario ventana) {
+	public VentanaLibros(Usuario usuario, String command, VentanaUsuario ventana) {
 		this.usuario = usuario;
 		setSize(400, 300);
 		setTitle("Panel de libros");
 		setLocationRelativeTo(ventana);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		if (usuario instanceof UsuarioBasico) {
+		if (command.equals("getlibros") || command.equals("updatelibro")) {
 
 			showPanelLibros();
 
-		} else {
+		} else if (command.equals("createlibro")) {
 
 			showPanelCargaLibro();
 
@@ -61,26 +63,35 @@ public class VentanaLibros extends JFrame implements ActionListener {
 
 		cargaBtnPanel.setLayout(new GridLayout(2, 2, 10, 10));
 
-		List<Libro> librosDisponibles = new ArrayList<Libro>();
+		List<Libro> libros = new ArrayList<Libro>();
 
 		if (usuario instanceof UsuarioBasico usuario) {
 
-			librosDisponibles = usuario.consultarLibrosDisp();
+			libros = usuario.consultarLibrosDisp();
+			Factory.newLabel(cargaBtnPanel, "Libro a alquilar");
+			cargaBtnPanel.add(prestamoTxf);
+			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Realizar prestamo", "realizarprestamo", this));
+			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Salir", "salir", this));
+
+		} else {
+
+			libros = RepositorioLibros.getLibros();
+			Factory.newLabel(cargaBtnPanel, "Libro a modificar");
+			cargaBtnPanel.add(ISBNModTxf);
+			Factory.newLabel(cargaBtnPanel, "Estado");
+			cargaBtnPanel.add(estadoTxf);
+			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Modificar libro", "modificarlibro", this));
+			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Salir", "salir", this));
 
 		}
 
-		TableModel tableModel = new LibroTableModel(librosDisponibles);
+		TableModel tableModel = new LibroTableModel(libros);
 		table = new JTable(tableModel);
 
 		JScrollPane scrollPane = new JScrollPane(table);
 
 		JPanel librosPanel = new JPanel(new BorderLayout());
 		librosPanel.add(scrollPane, BorderLayout.CENTER);
-
-		Factory.newLabel(cargaBtnPanel, "ISBN a alquilar");
-		cargaBtnPanel.add(prestamoTxf);
-		cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Realizar prestamo", "realizarprestamo", this));
-		cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Salir", "salir", this));
 
 		librosPanel.add(cargaBtnPanel, BorderLayout.SOUTH);
 
@@ -157,6 +168,14 @@ public class VentanaLibros extends JFrame implements ActionListener {
 			if (usuario instanceof UsuarioBasico usuario) {
 
 				usuario.realizarPrestamo(prestamoTxf.getText(), usuario, this);
+
+			}
+
+		} else if (e.getActionCommand().equals("modificarlibro")) {
+
+			if (usuario instanceof Bibliotecario bibliotecario) {
+
+				bibliotecario.gestionarLibro(ISBNModTxf.getText(), estadoTxf.getText(), table);
 
 			}
 

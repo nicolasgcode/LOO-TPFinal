@@ -1,6 +1,7 @@
 package sistema_biblioteca;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 public class Bibliotecario extends Usuario {
 
@@ -34,7 +35,23 @@ public class Bibliotecario extends Usuario {
 
 	}
 
-	public void gestionarLibro() {
+	public void gestionarLibro(String ISBN, String estado, JTable table) {
+
+		Libro libro = RepositorioLibros.getLibroByISBN(ISBN);
+
+		System.out.println(ISBN);
+
+		if (libro != null) {
+
+			libro.setEstado(estado);
+			JOptionPane.showMessageDialog(null, "Operación realizada con éxito");
+			((LibroTableModel) table.getModel()).fireTableDataChanged();
+
+		} else {
+
+			JOptionPane.showMessageDialog(null, "Libro no encontrado");
+
+		}
 
 	}
 

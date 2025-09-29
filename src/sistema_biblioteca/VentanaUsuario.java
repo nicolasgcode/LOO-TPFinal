@@ -53,8 +53,8 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 
 		panelUsuario.setLayout(new BorderLayout(10, 50));
 		menuUsuario.setLayout(new GridLayout(2, 1, 10, 10));
-		Factory.newButton(menuUsuario, "Libros disponibles", "getlibros", this);
-		Factory.newButton(menuUsuario, "Realizar prestamo", "doprestamo", this);
+		Factory.newButton(menuUsuario, "Consultar y alquilar libros", "getlibros", this);
+
 		Factory.newButton(panelSalir, "Salir", "salir", this);
 
 		panelUsuario.add(Factory.newPanel(), BorderLayout.EAST);
@@ -65,6 +65,7 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 		menuBibliotecario.setLayout(new GridLayout(2, 1, 10, 10));
 		Factory.newButton(menuBibliotecario, "Prestamos realizados", "getprestamos", this);
 		Factory.newButton(menuBibliotecario, "Cargar Libro", "createlibro", this);
+		Factory.newButton(menuBibliotecario, "Modificar Libro", "updatelibro", this);
 
 		panelBibliotecario.add(Factory.newPanel(), BorderLayout.EAST);
 		panelBibliotecario.add(Factory.newPanel(), BorderLayout.WEST);
@@ -100,9 +101,10 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 			VentanaLogin ventanaLogin = new VentanaLogin();
 			ventanaLogin.setVisible(true);
 
-		} else if (e.getActionCommand().equals("getlibros") || e.getActionCommand().equals("createlibro")) {
+		} else if (e.getActionCommand().equals("getlibros") || e.getActionCommand().equals("createlibro")
+				|| e.getActionCommand().equals("updatelibro")) {
 
-			VentanaLibros ventanaLibros = new VentanaLibros(usuario, this);
+			VentanaLibros ventanaLibros = new VentanaLibros(usuario, e.getActionCommand(), this);
 			this.setVisible(false);
 			ventanaLibros.setVisible(true);
 		} else if (e.getActionCommand().equals("getprestamos")) {
