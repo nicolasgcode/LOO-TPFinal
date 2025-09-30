@@ -1,19 +1,20 @@
 package sistema_biblioteca;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Prestamo {
 
 	private Usuario usuario;
 	private Libro libro;
-	private LocalDate fechaInicio;
-	private LocalDate fechaFin;
+	private String fechaInicio;
+	private String fechaFin;
 
 	public Prestamo(Usuario usuario, Libro libro) {
 		this.usuario = usuario;
 		this.libro = libro;
-		this.fechaInicio = LocalDate.now();
-		this.fechaFin = LocalDate.now().plusDays(7);
+		this.fechaInicio = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		this.fechaFin = LocalDate.now().plusDays(7).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 	}
 
 	public Usuario getUsuario() {
@@ -32,15 +33,15 @@ public class Prestamo {
 		this.libro = libro;
 	}
 
-	public LocalDate getFechaInicio() {
+	public String getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public LocalDate getFechaFin() {
+	public String getFechaFin() {
 		return fechaFin;
 	}
 
-	public void setFechaInicio(LocalDate fechaInicio) {
+	public void setFechaInicio(String fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 

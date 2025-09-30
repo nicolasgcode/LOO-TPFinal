@@ -33,7 +33,9 @@ public class UsuarioBasico extends Usuario {
 
 	}
 
-	public void realizarPrestamo(String ISBN, Usuario usuario, JTable table, VentanaLibros ventana) {
+	public boolean realizarPrestamo(String ISBN, Usuario usuario, JTable table, VentanaLibros ventana) {
+
+		boolean exito = false;
 
 		Libro miLibro = RepositorioLibros.getLibroByISBN(ISBN);
 
@@ -43,23 +45,32 @@ public class UsuarioBasico extends Usuario {
 
 			if (miLibro != null) {
 
-				prestamo = new Prestamo(usuario, miLibro);
+				if (miLibro.getEstado().equals(EstadoLibro.DISPONIBLE)) {
 
-				try {
+					prestamo = new Prestamo(usuario, miLibro);
 
-					RepositorioPrestamos.getPrestamos().add(prestamo);
+					try {
 
-					usuario.getPrestamos().add(prestamo);
+						RepositorioPrestamos.getPrestamos().add(prestamo);
 
-					miLibro.setEstado(EstadoLibro.PRESTADO);
+						usuario.getPrestamos().add(prestamo);
 
-					JOptionPane.showMessageDialog(ventana, "Prestamo realizado con éxito");
+						miLibro.setEstado(EstadoLibro.PRESTADO);
 
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(ventana,
-							"Ha ocurrido un error al realizar el prestamo" + e.getMessage());
+						exito = true;
+
+						JOptionPane.showMessageDialog(ventana, "Prestamo realizado con éxito");
+
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(ventana,
+								"Ha ocurrido un error al realizar el prestamo" + e.getMessage());
+					}
+
+				} else {
+
+					JOptionPane.showMessageDialog(ventana, "El libro seleccionado no se encuentra disponible");
+
 				}
-
 			} else {
 				JOptionPane.showMessageDialog(ventana, "Libro no encontrado");
 			}
@@ -68,6 +79,8 @@ public class UsuarioBasico extends Usuario {
 			JOptionPane.showMessageDialog(ventana, "Usted ya se encuentra con un prestamo en curso");
 
 		}
+
+		return exito;
 
 	}
 

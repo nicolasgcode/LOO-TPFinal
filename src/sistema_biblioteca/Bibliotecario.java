@@ -45,7 +45,9 @@ public class Bibliotecario extends Usuario {
 
 	}
 
-	public void gestionarLibro(String ISBN, EstadoLibro estado, JTable table) {
+	public boolean gestionarLibro(String ISBN, EstadoLibro estado, JTable table) {
+
+		boolean success = false;
 
 		Libro libro = RepositorioLibros.getLibroByISBN(ISBN);
 
@@ -55,13 +57,15 @@ public class Bibliotecario extends Usuario {
 
 			libro.setEstado(estado);
 			JOptionPane.showMessageDialog(null, "Operación realizada con éxito");
-			((LibroTableModel) table.getModel()).fireTableDataChanged();
+			success = true;
 
 		} else {
 
 			JOptionPane.showMessageDialog(null, "Libro no encontrado");
 
 		}
+
+		return success;
 
 	}
 

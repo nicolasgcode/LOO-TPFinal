@@ -2,7 +2,7 @@ package sistema_biblioteca;
 
 public enum EstadoLibro {
 
-	DISPONIBLE("Disponible"), PRESTADO("Prestado"), RESERVADO("Reservado"), NO_DISPONIBLE("No disponible");
+	DISPONIBLE("Disponible"), PRESTADO("Prestado"), NO_DISPONIBLE("No disponible");
 
 	private final String descripcion;
 

@@ -32,6 +32,7 @@ public class VentanaLibros extends JFrame implements ActionListener {
 	private JPanel cargaLibroPanel = new JPanel();
 
 	private JPanel cargaBtnPanel = new JPanel();
+
 	JComboBox<EstadoLibro> comboEstado = new JComboBox<>(EstadoLibro.values());
 
 	private JTextField ISBNTxf = new JTextField();
@@ -40,30 +41,30 @@ public class VentanaLibros extends JFrame implements ActionListener {
 	private JTextField edicionTxf = new JTextField();
 	private JTextField prestamoTxf = new JTextField();
 	private JTextField ISBNModTxf = new JTextField();
-	private JTextField estadoTxf = new JTextField();
+	List<Libro> libros = new ArrayList<Libro>();
 
 	public VentanaLibros(Usuario usuario, String command, VentanaUsuario ventana) {
 		this.usuario = usuario;
-		setSize(400, 300);
 		setTitle("Panel de libros");
-		setLocationRelativeTo(ventana);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
 		if (command.equals("getlibros") || command.equals("updatelibro")) {
+
+			setSize(520, 300);
 
 			showPanelLibros();
 
 		} else if (command.equals("createlibro")) {
 
+			setSize(400, 300);
+
 			showPanelCargaLibro();
 
 		}
+		setLocationRelativeTo(ventana);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 	}
 
 	public void showPanelLibros() {
-
-		List<Libro> libros = new ArrayList<Libro>();
 
 		if (usuario instanceof UsuarioBasico usuario) {
 
@@ -106,6 +107,7 @@ public class VentanaLibros extends JFrame implements ActionListener {
 	}
 
 	public void showPanelCargaLibro() {
+
 		dataPanel.setLayout(new BorderLayout(10, 50));
 
 		cargaLibroPanel.setLayout(new GridLayout(5, 2));
@@ -169,7 +171,13 @@ public class VentanaLibros extends JFrame implements ActionListener {
 
 			if (usuario instanceof UsuarioBasico usuario) {
 
-				usuario.realizarPrestamo(prestamoTxf.getText(), usuario, table, this);
+				boolean exito = usuario.realizarPrestamo(prestamoTxf.getText(), usuario, table, this);
+
+				if (exito) {
+
+					table.setModel(new LibroTableModel(usuario.consultarLibrosDisp()));
+
+				}
 
 			}
 
@@ -177,7 +185,16 @@ public class VentanaLibros extends JFrame implements ActionListener {
 
 			if (usuario instanceof Bibliotecario bibliotecario) {
 
-				bibliotecario.gestionarLibro(ISBNModTxf.getText(), (EstadoLibro) comboEstado.getSelectedItem(), table);
+				boolean success = bibliotecario.gestionarLibro(ISBNModTxf.getText(),
+						(EstadoLibro) comboEstado.getSelectedItem(), table);
+
+				if (success) {
+
+					((LibroTableModel) table.getModel()).fireTableDataChanged();
+
+				} else {
+					JOptionPane.showMessageDialog(this, "Error al cambiar estado del libro");
+				}
 
 			}
 
