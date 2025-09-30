@@ -59,7 +59,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("login")) {
 
-			Usuario usuario = Validator.userExists(mailTxf.getText(), pswTxf.getPassword(), this);
+			Usuario usuario = RepositorioUsuarios.getUser(mailTxf.getText(), pswTxf.getPassword(), this);
 
 			if (usuario != null) {
 				VentanaUsuario ventanaUsuario = new VentanaUsuario(usuario, this);

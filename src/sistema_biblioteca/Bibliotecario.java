@@ -12,27 +12,32 @@ public class Bibliotecario extends Usuario {
 
 	public boolean cargarLibro(String ISBN, String titulo, String autor, String edicion, VentanaLibros ventanaLibros) {
 
-		boolean exists = Validator.checkExiste(ISBN, titulo, autor, edicion, ventanaLibros);
+		boolean valid = Validator.validateLibroInput(ISBN, titulo, autor, edicion, ventanaLibros);
+
 		boolean exito = false;
 
-		if (!exists) {
+		if (valid) {
+			boolean exists = RepositorioLibros.checkExisteLibro(ISBN, titulo, autor, edicion, ventanaLibros);
 
-			if (RepositorioLibros.getLibros().size() < 20) {
+			if (!exists) {
 
-				Libro nuevoLibro = new Libro(ISBN, titulo, autor, edicion, "Disponible");
+				if (RepositorioLibros.getLibros().size() < 20) {
 
-				try {
+					Libro nuevoLibro = new Libro(ISBN, titulo, autor, edicion, "Disponible");
 
-					RepositorioLibros.getLibros().add(nuevoLibro);
-					exito = true;
-					JOptionPane.showMessageDialog(ventanaLibros, "Libro cargado con éxito");
+					try {
 
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(ventanaLibros, "Error al cargar el libro" + e.getMessage());
+						RepositorioLibros.getLibros().add(nuevoLibro);
+						exito = true;
+						JOptionPane.showMessageDialog(ventanaLibros, "Libro cargado con éxito");
+
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(ventanaLibros, "Error al cargar el libro" + e.getMessage());
+					}
+
+				} else {
+					JOptionPane.showMessageDialog(ventanaLibros, "Se ha alcanzado la cantidad máxima de libros");
 				}
-
-			} else {
-				JOptionPane.showMessageDialog(ventanaLibros, "Se ha alcanzado la cantidad máxima de libros");
 			}
 		}
 

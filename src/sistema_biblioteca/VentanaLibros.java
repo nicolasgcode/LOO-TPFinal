@@ -169,7 +169,7 @@ public class VentanaLibros extends JFrame implements ActionListener {
 
 			if (usuario instanceof UsuarioBasico usuario) {
 
-				usuario.realizarPrestamo(prestamoTxf.getText(), usuario, this);
+				usuario.realizarPrestamo(prestamoTxf.getText(), usuario, table, this);
 
 			}
 

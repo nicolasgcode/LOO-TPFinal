@@ -1,6 +1,5 @@
 package sistema_biblioteca;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,42 +29,14 @@ public class Validator {
 
 	}
 
-	public static Usuario userExists(String mail, char[] psw, VentanaLogin ventanaLogin) {
-
-		String pswString = new String(psw);
-
-		List<Usuario> users = RepositorioUsuarios.getUsuarios();
-
-		boolean valid = validateLoginInput(mail, pswString, ventanaLogin);
-
-		if (valid) {
-
-			for (Usuario usuario : users) {
-
-				if (usuario.getMail().equals(mail) && usuario.getPsw().equals(pswString)) {
-
-					return usuario;
-
-				}
-
-			}
-
-			JOptionPane.showMessageDialog(ventanaLogin, "Usuario no encontrado");
-
-		}
-
-		return null;
-
-	}
-
 	public static boolean validateLibroInput(String ISBN, String titulo, String autor, String edicion,
 			VentanaLibros ventanaLibros) {
 
 		boolean valid = true;
 
 		Pattern isbnPattern = Pattern.compile("^\\d{13}$");
-		Pattern tituloPattern = Pattern.compile("^[\\\\p{L}0-9 ,.:;!?()'\\\"-]{1,100}$");
-		Pattern autorPattern = Pattern.compile("^[\\p{L} '-]{2,60}$");
+		Pattern tituloPattern = Pattern.compile("[A-Z][a-zA-Z0-9\\s,%!¡¿?()\\[\\]{}+*/-]{1,50}");
+		Pattern autorPattern = Pattern.compile("^([a-zA-Z]{2,}\\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\\s?([a-zA-Z]{1,})?)");
 		Pattern edicionPattern = Pattern.compile("^\\d{1,4}$");
 
 		Matcher isbnMatcher = isbnPattern.matcher(ISBN);
@@ -89,38 +60,6 @@ public class Validator {
 		}
 
 		return valid;
-	}
-
-	public static boolean checkExiste(String ISBN, String titulo, String autor, String edicion,
-			VentanaLibros ventanaLibros) {
-
-		boolean valid = validateLibroInput(ISBN, titulo, autor, edicion, ventanaLibros);
-		boolean exists = false;
-
-		if (valid) {
-
-			List<Libro> libros = RepositorioLibros.getLibros();
-
-			for (Libro libro : libros) {
-
-				if (libro.getISBN().equals(ISBN)) {
-					JOptionPane.showMessageDialog(ventanaLibros, "El ISBN ingresado ya existe");
-
-					exists = true;
-
-				} else if (libro.getTitulo().equalsIgnoreCase(titulo)) {
-
-					JOptionPane.showMessageDialog(ventanaLibros, "El título ingresado ya existe");
-
-					exists = true;
-
-				}
-
-			}
-
-		}
-		return exists;
-
 	}
 
 }
