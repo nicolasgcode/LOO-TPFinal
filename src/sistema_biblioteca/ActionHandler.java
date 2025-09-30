@@ -1,23 +1,24 @@
 package sistema_biblioteca;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 public class ActionHandler {
 
-	public void Salir(VentanaLibros ventanaLibro, Usuario usuario) {
+	public void Salir(JFrame ventana, Usuario usuario) {
 		VentanaUsuario ventanaUsuario = new VentanaUsuario(usuario, null);
-		ventanaLibro.setVisible(false);
+		ventana.setVisible(false);
 		ventanaUsuario.setVisible(true);
 
 	}
 
-	public void Salir(VentanaPrestamos ventanaPrestamos, Usuario usuario) {
-		VentanaUsuario ventanaUsuario = new VentanaUsuario(usuario, null);
-		ventanaPrestamos.setVisible(false);
-		ventanaUsuario.setVisible(true);
-
-	}
+//	public void Salir(VentanaPrestamos ventanaPrestamos, Usuario usuario) {
+//		VentanaUsuario ventanaUsuario = new VentanaUsuario(usuario, null);
+//		ventanaPrestamos.setVisible(false);
+//		ventanaUsuario.setVisible(true);
+//
+//	}
 
 	public void CargarLibro(Usuario usuario, String ISBN, String titulo, String autor, String edicion,
 			VentanaLibros ventanaLibros) {
@@ -80,6 +81,27 @@ public class ActionHandler {
 			ventanaUsuario.setVisible(true);
 
 		}
+	}
+
+	public void CreateVentanaLogin(JFrame ventana) {
+
+		ventana.setVisible(false);
+		VentanaLogin ventanaLogin = new VentanaLogin();
+		ventanaLogin.setVisible(true);
+	}
+
+	public void CreateVentanaLibros(JFrame ventana, Usuario usuario, String command) {
+
+		VentanaLibros ventanaLibros = new VentanaLibros(usuario, command, ventana);
+		ventana.setVisible(false);
+		ventanaLibros.setVisible(true);
+	}
+
+	public void CreateVentanaPrestamos(JFrame ventana, Usuario usuario) {
+
+		VentanaPrestamos ventanaPrestamos = new VentanaPrestamos(usuario, ventana);
+		ventana.setVisible(false);
+		ventanaPrestamos.setVisible(true);
 	}
 
 }

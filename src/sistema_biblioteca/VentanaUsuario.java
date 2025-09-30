@@ -23,9 +23,11 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 	JPanel menuUsuario = new JPanel();
 	JPanel panelBibliotecario = new JPanel();
 	JPanel menuBibliotecario = new JPanel();
-	private VentanaLogin ventana;
+	private JFrame ventana = new JFrame();
 
-	public VentanaUsuario(Usuario usuario, VentanaLogin ventana) {
+	private ActionHandler handler = new ActionHandler();
+
+	public VentanaUsuario(Usuario usuario, JFrame ventana) {
 		this.ventana = ventana;
 		this.usuario = usuario;
 		setSize(400, 300);
@@ -95,23 +97,30 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("salir")) {
 
-			this.setVisible(false);
-			VentanaLogin ventanaLogin = new VentanaLogin();
-			ventanaLogin.setVisible(true);
+		String command = e.getActionCommand();
 
-		} else if (e.getActionCommand().equals("getlibros") || e.getActionCommand().equals("createlibro")
-				|| e.getActionCommand().equals("updatelibro")) {
+		switch (command) {
+		case "getlibros":
+		case "createlibro":
+		case "updatelibro":
 
-			VentanaLibros ventanaLibros = new VentanaLibros(usuario, e.getActionCommand(), this);
-			this.setVisible(false);
-			ventanaLibros.setVisible(true);
-		} else if (e.getActionCommand().equals("getprestamos")) {
-			VentanaPrestamos ventanaPrestamos = new VentanaPrestamos(usuario, this);
-			this.setVisible(false);
-			ventanaPrestamos.setVisible(true);
+			handler.CreateVentanaLibros(this, usuario, command);
 
+			break;
+		case "getprestamos":
+
+			handler.CreateVentanaPrestamos(this, usuario);
+
+			break;
+		case "salir":
+
+			handler.CreateVentanaLogin(this);
+
+			break;
+
+		default:
+			break;
 		}
 
 	}

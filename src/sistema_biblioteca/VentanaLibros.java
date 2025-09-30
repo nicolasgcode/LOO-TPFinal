@@ -43,7 +43,7 @@ public class VentanaLibros extends JFrame implements ActionListener {
 	private JTextField ISBNModTxf = new JTextField();
 	List<Libro> libros = new ArrayList<Libro>();
 
-	public VentanaLibros(Usuario usuario, String command, VentanaUsuario ventana) {
+	public VentanaLibros(Usuario usuario, String command, JFrame ventana) {
 		this.usuario = usuario;
 		setTitle("Panel de libros");
 		if (command.equals("getlibros") || command.equals("updatelibro")) {
