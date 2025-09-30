@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 
 public class UsuarioBasico extends Usuario {
 
@@ -33,7 +32,7 @@ public class UsuarioBasico extends Usuario {
 
 	}
 
-	public boolean realizarPrestamo(String ISBN, Usuario usuario, JTable table, VentanaLibros ventana) {
+	public boolean realizarPrestamo(String ISBN, Usuario usuario, VentanaLibros ventana) {
 
 		boolean exito = false;
 

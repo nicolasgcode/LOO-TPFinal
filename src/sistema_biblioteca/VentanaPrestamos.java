@@ -19,6 +19,8 @@ public class VentanaPrestamos extends JFrame implements ActionListener {
 	private JPanel btnPanel = new JPanel();
 	private Usuario usuario;
 
+	private ActionHandler handler = new ActionHandler();
+
 	public VentanaPrestamos(Usuario usuario, VentanaUsuario ventana) {
 
 		this.usuario = usuario;

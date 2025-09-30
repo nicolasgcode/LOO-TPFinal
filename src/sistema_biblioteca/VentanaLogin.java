@@ -20,6 +20,8 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	private JTextField mailTxf = new JTextField();
 	private JPasswordField pswTxf = new JPasswordField();
 
+	private ActionHandler handler = new ActionHandler();
+
 	public VentanaLogin() {
 		setSize(400, 300);
 		setTitle("Sistema de gestión para biblioteca");
@@ -59,16 +61,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("login")) {
 
-			Usuario usuario = RepositorioUsuarios.getUser(mailTxf.getText(), pswTxf.getPassword(), this);
-
-			if (usuario != null) {
-				VentanaUsuario ventanaUsuario = new VentanaUsuario(usuario, this);
-
-				this.setVisible(false);
-
-				ventanaUsuario.setVisible(true);
-
-			}
+			handler.Login(mailTxf.getText(), pswTxf.getPassword(), this);
 
 		}
 

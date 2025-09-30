@@ -11,7 +11,6 @@ import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -21,6 +20,7 @@ import javax.swing.table.TableModel;
 public class VentanaLibros extends JFrame implements ActionListener {
 
 	private Usuario usuario;
+	private ActionHandler handler = new ActionHandler();
 
 	private CardLayout cardLayout = new CardLayout();
 	private JTable table;
@@ -144,60 +144,31 @@ public class VentanaLibros extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("salir")) {
 
-			VentanaUsuario ventanaUsuario = new VentanaUsuario(usuario, null);
-			this.setVisible(false);
-			ventanaUsuario.setVisible(true);
+		String command = e.getActionCommand();
 
-		} else if (e.getActionCommand().equals("cargar")) {
+		switch (command) {
+		case "realizarprestamo":
+			handler.RealizarPrestamo(usuario, prestamoTxf.getText(), table, this);
 
-			if (usuario instanceof Bibliotecario bibliotecario) {
+			break;
 
-				boolean exito = bibliotecario.cargarLibro(ISBNTxf.getText(), tituloTxf.getText(), autorTxf.getText(),
-						edicionTxf.getText(), this);
+		case "cargar":
+			handler.CargarLibro(usuario, ISBNTxf.getText(), tituloTxf.getText(), autorTxf.getText(),
+					edicionTxf.getText(), this);
+			break;
 
-				if (exito) {
+		case "modificarlibro":
+			handler.ModificarLibro(usuario, ISBNModTxf.getText(), (EstadoLibro) comboEstado.getSelectedItem(), table,
+					this);
+			break;
 
-					limpiarCarga();
+		case "salir":
+			handler.Salir(this, usuario);
+			break;
 
-				}
-
-			} else {
-				JOptionPane.showMessageDialog(this, "No tienes permiso para cargar un libro");
-			}
-
-		} else if (e.getActionCommand().equals("realizarprestamo")) {
-
-			if (usuario instanceof UsuarioBasico usuario) {
-
-				boolean exito = usuario.realizarPrestamo(prestamoTxf.getText(), usuario, table, this);
-
-				if (exito) {
-
-					table.setModel(new LibroTableModel(usuario.consultarLibrosDisp()));
-
-				}
-
-			}
-
-		} else if (e.getActionCommand().equals("modificarlibro")) {
-
-			if (usuario instanceof Bibliotecario bibliotecario) {
-
-				boolean success = bibliotecario.gestionarLibro(ISBNModTxf.getText(),
-						(EstadoLibro) comboEstado.getSelectedItem(), table);
-
-				if (success) {
-
-					((LibroTableModel) table.getModel()).fireTableDataChanged();
-
-				} else {
-					JOptionPane.showMessageDialog(this, "Error al cambiar estado del libro");
-				}
-
-			}
-
+		default:
+			break;
 		}
 
 	}
