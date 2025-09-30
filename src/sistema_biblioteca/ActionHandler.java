@@ -12,6 +12,13 @@ public class ActionHandler {
 
 	}
 
+	public void Salir(VentanaPrestamos ventanaPrestamos, Usuario usuario) {
+		VentanaUsuario ventanaUsuario = new VentanaUsuario(usuario, null);
+		ventanaPrestamos.setVisible(false);
+		ventanaUsuario.setVisible(true);
+
+	}
+
 	public void CargarLibro(Usuario usuario, String ISBN, String titulo, String autor, String edicion,
 			VentanaLibros ventanaLibros) {
 		if (usuario instanceof Bibliotecario bibliotecario) {

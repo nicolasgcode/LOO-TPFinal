@@ -55,9 +55,7 @@ public class VentanaPrestamos extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("salir")) {
 
-			VentanaUsuario ventanaUsuario = new VentanaUsuario(usuario);
-			this.setVisible(false);
-			ventanaUsuario.setVisible(true);
+			handler.Salir(this, usuario);
 
 		}
 
