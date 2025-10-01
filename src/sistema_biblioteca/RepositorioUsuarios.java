@@ -3,6 +3,7 @@ package sistema_biblioteca;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class RepositorioUsuarios {
@@ -19,11 +20,11 @@ public class RepositorioUsuarios {
 		return users;
 	}
 
-	public static Usuario getUser(String mail, char[] psw, VentanaLogin ventanaLogin) {
+	public static Usuario getUser(String mail, char[] psw, JFrame ventana) {
 
 		String pswString = new String(psw);
 
-		boolean valid = Validator.validateLoginInput(mail, pswString, ventanaLogin);
+		boolean valid = Validator.validateLoginInput(mail, pswString, ventana);
 
 		if (valid) {
 
@@ -37,7 +38,7 @@ public class RepositorioUsuarios {
 
 			}
 
-			JOptionPane.showMessageDialog(ventanaLogin, "Usuario no encontrado");
+			JOptionPane.showMessageDialog(ventana, "Usuario no encontrado");
 
 		}
 

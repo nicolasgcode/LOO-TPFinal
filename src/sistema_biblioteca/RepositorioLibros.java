@@ -3,6 +3,7 @@ package sistema_biblioteca;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class RepositorioLibros {
@@ -41,21 +42,20 @@ public class RepositorioLibros {
 		return null;
 	}
 
-	public static boolean checkExisteLibro(String ISBN, String titulo, String autor, String edicion,
-			VentanaLibros ventanaLibros) {
+	public static boolean checkExisteLibro(String ISBN, String titulo, String autor, String edicion, JFrame ventana) {
 
 		boolean exists = false;
 
 		for (Libro libro : libros) {
 
 			if (libro.getISBN().equals(ISBN)) {
-				JOptionPane.showMessageDialog(ventanaLibros, "El ISBN ingresado ya existe");
+				JOptionPane.showMessageDialog(ventana, "El ISBN ingresado ya existe");
 
 				exists = true;
 
 			} else if (libro.getTitulo().equalsIgnoreCase(titulo) && libro.getAutor().equalsIgnoreCase(autor)) {
 
-				JOptionPane.showMessageDialog(ventanaLibros, "El título ingresado ya existe para el actor: " + autor);
+				JOptionPane.showMessageDialog(ventana, "El título ingresado ya existe para el actor: " + autor);
 
 				exists = true;
 

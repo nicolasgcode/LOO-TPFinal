@@ -1,5 +1,6 @@
 package sistema_biblioteca;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -10,14 +11,14 @@ public class Bibliotecario extends Usuario {
 
 	}
 
-	public boolean cargarLibro(String ISBN, String titulo, String autor, String edicion, VentanaLibros ventanaLibros) {
+	public boolean cargarLibro(String ISBN, String titulo, String autor, String edicion, JFrame ventana) {
 
-		boolean valid = Validator.validateLibroInput(ISBN, titulo, autor, edicion, ventanaLibros);
+		boolean valid = Validator.validateLibroInput(ISBN, titulo, autor, edicion, ventana);
 
 		boolean exito = false;
 
 		if (valid) {
-			boolean exists = RepositorioLibros.checkExisteLibro(ISBN, titulo, autor, edicion, ventanaLibros);
+			boolean exists = RepositorioLibros.checkExisteLibro(ISBN, titulo, autor, edicion, ventana);
 
 			if (!exists) {
 
@@ -29,14 +30,14 @@ public class Bibliotecario extends Usuario {
 
 						RepositorioLibros.getLibros().add(nuevoLibro);
 						exito = true;
-						JOptionPane.showMessageDialog(ventanaLibros, "Libro cargado con éxito");
+						JOptionPane.showMessageDialog(ventana, "Libro cargado con éxito");
 
 					} catch (Exception e) {
-						JOptionPane.showMessageDialog(ventanaLibros, "Error al cargar el libro" + e.getMessage());
+						JOptionPane.showMessageDialog(ventana, "Error al cargar el libro" + e.getMessage());
 					}
 
 				} else {
-					JOptionPane.showMessageDialog(ventanaLibros, "Se ha alcanzado la cantidad máxima de libros");
+					JOptionPane.showMessageDialog(ventana, "Se ha alcanzado la cantidad máxima de libros");
 				}
 			}
 		}
@@ -45,7 +46,7 @@ public class Bibliotecario extends Usuario {
 
 	}
 
-	public boolean gestionarLibro(String ISBN, EstadoLibro estado, JTable table) {
+	public boolean gestionarLibro(String ISBN, EstadoLibro estado, JTable table, JFrame ventana) {
 
 		boolean success = false;
 
@@ -56,12 +57,12 @@ public class Bibliotecario extends Usuario {
 		if (libro != null) {
 
 			libro.setEstado(estado);
-			JOptionPane.showMessageDialog(null, "Operación realizada con éxito");
+			JOptionPane.showMessageDialog(ventana, "Operación realizada con éxito");
 			success = true;
 
 		} else {
 
-			JOptionPane.showMessageDialog(null, "Libro no encontrado");
+			JOptionPane.showMessageDialog(ventana, "Libro no encontrado");
 
 		}
 

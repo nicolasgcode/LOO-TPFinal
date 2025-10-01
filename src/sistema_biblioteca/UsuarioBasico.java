@@ -3,6 +3,7 @@ package sistema_biblioteca;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class UsuarioBasico extends Usuario {
@@ -32,7 +33,7 @@ public class UsuarioBasico extends Usuario {
 
 	}
 
-	public boolean realizarPrestamo(String ISBN, Usuario usuario, VentanaLibros ventana) {
+	public boolean realizarPrestamo(String ISBN, Usuario usuario, JFrame ventana) {
 
 		boolean exito = false;
 

@@ -13,27 +13,26 @@ public class ActionHandler {
 
 	}
 
-	public void CargarLibro(Usuario usuario, String ISBN, String titulo, String autor, String edicion,
-			VentanaLibros ventanaLibros) {
+	public void CargarLibro(Usuario usuario, String ISBN, String titulo, String autor, String edicion, JFrame ventana) {
 		if (usuario instanceof Bibliotecario bibliotecario) {
 
-			boolean exito = bibliotecario.cargarLibro(ISBN, titulo, autor, edicion, ventanaLibros);
+			boolean exito = bibliotecario.cargarLibro(ISBN, titulo, autor, edicion, ventana);
 
 			if (exito) {
 
-				ventanaLibros.limpiarCarga();
+				((VentanaLibros) ventana).limpiarCarga();
 
 			}
 
 		} else {
-			JOptionPane.showMessageDialog(ventanaLibros, "No tienes permiso para cargar un libro");
+			JOptionPane.showMessageDialog(ventana, "No tienes permiso para cargar un libro");
 		}
 	}
 
-	public void RealizarPrestamo(Usuario usuario, String ISBNPrestamo, JTable table, VentanaLibros ventanaLibros) {
+	public void RealizarPrestamo(Usuario usuario, String ISBNPrestamo, JTable table, JFrame ventana) {
 		if (usuario instanceof UsuarioBasico user) {
 
-			boolean exito = user.realizarPrestamo(ISBNPrestamo, usuario, ventanaLibros);
+			boolean exito = user.realizarPrestamo(ISBNPrestamo, usuario, ventana);
 
 			if (exito) {
 
@@ -45,37 +44,36 @@ public class ActionHandler {
 
 	}
 
-	public void ModificarLibro(Usuario usuario, String ISBN, EstadoLibro estado, JTable table,
-			VentanaLibros ventanaLibro) {
+	public void ModificarLibro(Usuario usuario, String ISBN, EstadoLibro estado, JTable table, JFrame ventana) {
 		if (usuario instanceof Bibliotecario bibliotecario) {
 
 			if (ISBN != "") {
 
-				boolean success = bibliotecario.gestionarLibro(ISBN, estado, table);
+				boolean success = bibliotecario.gestionarLibro(ISBN, estado, table, ventana);
 
 				if (success) {
 
 					((LibroTableModel) table.getModel()).fireTableDataChanged();
 
 				} else {
-					JOptionPane.showMessageDialog(ventanaLibro, "Error al cambiar estado del libro");
+					JOptionPane.showMessageDialog(ventana, "Error al cambiar estado del libro");
 				}
 
 			} else {
-				JOptionPane.showMessageDialog(ventanaLibro, "Por favor seleccione un libro");
+				JOptionPane.showMessageDialog(ventana, "Por favor seleccione un libro");
 			}
 
 		}
 	}
 
-	public void Login(String mail, char[] psw, VentanaLogin ventanaLogin) {
+	public void Login(String mail, char[] psw, JFrame ventana) {
 
-		Usuario usuario = RepositorioUsuarios.getUser(mail, psw, ventanaLogin);
+		Usuario usuario = RepositorioUsuarios.getUser(mail, psw, ventana);
 
 		if (usuario != null) {
-			VentanaUsuario ventanaUsuario = new VentanaUsuario(usuario, ventanaLogin);
+			VentanaUsuario ventanaUsuario = new VentanaUsuario(usuario, ventana);
 
-			ventanaLogin.setVisible(false);
+			ventana.setVisible(false);
 
 			ventanaUsuario.setVisible(true);
 

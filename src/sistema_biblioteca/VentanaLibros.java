@@ -39,8 +39,6 @@ public class VentanaLibros extends JFrame implements ActionListener {
 	private JTextField tituloTxf = new JTextField();
 	private JTextField autorTxf = new JTextField();
 	private JTextField edicionTxf = new JTextField();
-	private JTextField prestamoTxf = new JTextField();
-	private JTextField ISBNModTxf = new JTextField();
 	List<Libro> libros = new ArrayList<Libro>();
 
 	public VentanaLibros(Usuario usuario, String command, JFrame ventana) {
