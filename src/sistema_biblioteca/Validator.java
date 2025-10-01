@@ -18,10 +18,10 @@ public class Validator {
 		Matcher pswMatcher = pswPattern.matcher(psw);
 
 		if (!mailMatcher.matches()) {
-			JOptionPane.showMessageDialog(ventana, "Mail inválido");
+			JOptionPane.showMessageDialog(ventana, "Mail inválido", "Error de campo", JOptionPane.ERROR_MESSAGE);
 			valid = false;
 		} else if (!pswMatcher.matches()) {
-			JOptionPane.showMessageDialog(ventana, "Contrasenia inválida");
+			JOptionPane.showMessageDialog(ventana, "Contraseña inválida", "Error de campo", JOptionPane.ERROR_MESSAGE);
 			valid = false;
 
 		}
@@ -37,7 +37,7 @@ public class Validator {
 		Pattern isbnPattern = Pattern.compile("^\\d{13}$");
 		Pattern tituloPattern = Pattern.compile("[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚáéíóúñÑ0-9\\s,%!¡¿?()\\[\\]{}+*/-]{1,50}");
 		Pattern autorPattern = Pattern.compile(
-				"^([a-zA-ZÁÉÍÓÚáéíóúÑñ]{2,}\\s[a-zA-ZÁÉÍÓÚáéíóúÑñ]{1,}'?-?[a-zA-ZÁÉÍÓÚáéíóúÑñ]{2,}\\s?([a-zA-ZÁÉÍÓÚáéíóúÑñ]{1,})?)");
+				"(^[a-zA-ZÁÉÍÓÚáéíóúÑñ]{2,}\\s[a-zA-ZÁÉÍÓÚáéíóúÑñ]{1,}'?-?[a-zA-ZÁÉÍÓÚáéíóúÑñ]{2,}\\s?([a-zA-ZÁÉÍÓÚáéíóúÑñ]{1,})?)");
 		Pattern edicionPattern = Pattern.compile("^\\d{1,4}$");
 
 		Matcher isbnMatcher = isbnPattern.matcher(ISBN);
@@ -46,17 +46,17 @@ public class Validator {
 		Matcher edicionMatcher = edicionPattern.matcher(edicion);
 
 		if (!isbnMatcher.matches()) {
-			JOptionPane.showMessageDialog(ventana, "ISBN inválido");
+			JOptionPane.showMessageDialog(ventana, "ISBN inválido", "Error de campo", JOptionPane.ERROR_MESSAGE);
 			valid = false;
 		} else if (!tituloMatcher.matches()) {
-			JOptionPane.showMessageDialog(ventana, "Título inválido");
+			JOptionPane.showMessageDialog(ventana, "Título inválido", "Error de campo", JOptionPane.ERROR_MESSAGE);
 			valid = false;
 
 		} else if (!autorMatcher.matches()) {
-			JOptionPane.showMessageDialog(ventana, "Autor inválido");
+			JOptionPane.showMessageDialog(ventana, "Autor inválido", "Error de campo", JOptionPane.ERROR_MESSAGE);
 			valid = false;
 		} else if (!edicionMatcher.matches()) {
-			JOptionPane.showMessageDialog(ventana, "Edición inválida");
+			JOptionPane.showMessageDialog(ventana, "Edición inválida", "Error de campo", JOptionPane.ERROR_MESSAGE);
 			valid = false;
 		}
 

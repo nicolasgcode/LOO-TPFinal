@@ -49,13 +49,15 @@ public class RepositorioLibros {
 		for (Libro libro : libros) {
 
 			if (libro.getISBN().equals(ISBN)) {
-				JOptionPane.showMessageDialog(ventana, "El ISBN ingresado ya existe");
+				JOptionPane.showMessageDialog(ventana, "El ISBN ingresado ya existe", "Error",
+						JOptionPane.ERROR_MESSAGE);
 
 				exists = true;
 
 			} else if (libro.getTitulo().equalsIgnoreCase(titulo) && libro.getAutor().equalsIgnoreCase(autor)) {
 
-				JOptionPane.showMessageDialog(ventana, "El título ingresado ya existe para el actor: " + autor);
+				JOptionPane.showMessageDialog(ventana, "El título ingresado ya existe para el actor: " + autor, "Error",
+						JOptionPane.ERROR_MESSAGE);
 
 				exists = true;
 

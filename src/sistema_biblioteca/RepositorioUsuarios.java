@@ -38,7 +38,7 @@ public class RepositorioUsuarios {
 
 			}
 
-			JOptionPane.showMessageDialog(ventana, "Usuario no encontrado");
+			JOptionPane.showMessageDialog(ventana, "Usuario no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
 
 		}
 

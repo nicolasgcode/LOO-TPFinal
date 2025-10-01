@@ -160,6 +160,10 @@ public class VentanaLibros extends JFrame implements ActionListener {
 					(EstadoLibro) comboEstado.getSelectedItem(), table, this);
 			break;
 
+		case "limpiar":
+			limpiarCarga();
+			break;
+
 		case "salir":
 			handler.Salir(this, usuario);
 			break;

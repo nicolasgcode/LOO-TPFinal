@@ -54,9 +54,15 @@ public class Bibliotecario extends Usuario {
 
 		if (libro != null) {
 			if (!libro.getEstado().equals(EstadoLibro.PRESTADO)) {
-				libro.setEstado(estado);
-				JOptionPane.showMessageDialog(ventana, "Operación realizada con éxito");
-				success = true;
+				if (!libro.getEstado().equals(estado)) {
+					libro.setEstado(estado);
+					JOptionPane.showMessageDialog(ventana, "Operación realizada con éxito");
+					success = true;
+
+				} else {
+					JOptionPane.showMessageDialog(ventana, "El libro ya está en ese estado", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
 
 			} else {
 				JOptionPane.showMessageDialog(ventana, "El libro se encuentra prestado", "Error al cambiar estado",
