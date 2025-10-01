@@ -35,9 +35,8 @@ public class Validator {
 		boolean valid = true;
 
 		Pattern isbnPattern = Pattern.compile("^\\d{13}$");
-		Pattern tituloPattern = Pattern.compile("[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚáéíóúñÑ0-9\\s,%!¡¿?()\\[\\]{}+*/-]{1,50}");
-		Pattern autorPattern = Pattern.compile(
-				"(^[a-zA-ZÁÉÍÓÚáéíóúÑñ]{2,}\\s[a-zA-ZÁÉÍÓÚáéíóúÑñ]{1,}'?-?[a-zA-ZÁÉÍÓÚáéíóúÑñ]{2,}\\s?([a-zA-ZÁÉÍÓÚáéíóúÑñ]{1,})?)");
+		Pattern tituloPattern = Pattern.compile("[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚáéíóúñÑ0-9\\.\\s,%!¡¿?()\\[\\]{}+*/-]{1,50}");
+		Pattern autorPattern = Pattern.compile("[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚáéíóúñÑ\\.\\s]{1,50}");
 		Pattern edicionPattern = Pattern.compile("^\\d{1,4}$");
 
 		Matcher isbnMatcher = isbnPattern.matcher(ISBN);
