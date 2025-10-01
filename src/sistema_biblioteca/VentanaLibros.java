@@ -66,24 +66,22 @@ public class VentanaLibros extends JFrame implements ActionListener {
 
 	public void showPanelLibros() {
 
+		cargaBtnPanel.setLayout(new FlowLayout());
+
 		if (usuario instanceof UsuarioBasico usuario) {
 
 			libros = usuario.consultarLibrosDisp();
-			cargaBtnPanel.setLayout(new GridLayout(2, 2, 10, 10));
-			Factory.newLabel(cargaBtnPanel, "Libro a alquilar");
-			cargaBtnPanel.add(prestamoTxf);
+
 			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Realizar prestamo", "realizarprestamo", this));
 			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Salir", "salir", this));
 
 		} else if (usuario instanceof Bibliotecario) {
 
 			libros = RepositorioLibros.getLibros();
-			cargaBtnPanel.setLayout(new GridLayout(2, 3, 10, 10));
-			Factory.newLabel(cargaBtnPanel, "Libro a modificar");
-			cargaBtnPanel.add(ISBNModTxf);
-			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Modificar libro", "modificarlibro", this));
+			cargaBtnPanel.setLayout(new FlowLayout());
 			Factory.newLabel(cargaBtnPanel, "Estado");
 			cargaBtnPanel.add(comboEstado);
+			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Modificar libro", "modificarlibro", this));
 			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Salir", "salir", this));
 
 		}
@@ -149,7 +147,7 @@ public class VentanaLibros extends JFrame implements ActionListener {
 
 		switch (command) {
 		case "realizarprestamo":
-			handler.RealizarPrestamo(usuario, prestamoTxf.getText(), table, this);
+			handler.RealizarPrestamo(usuario, handler.getSelectedISBN(table), table, this);
 
 			break;
 
@@ -159,8 +157,8 @@ public class VentanaLibros extends JFrame implements ActionListener {
 			break;
 
 		case "modificarlibro":
-			handler.ModificarLibro(usuario, ISBNModTxf.getText(), (EstadoLibro) comboEstado.getSelectedItem(), table,
-					this);
+			handler.ModificarLibro(usuario, handler.getSelectedISBN(table), (EstadoLibro) comboEstado.getSelectedItem(),
+					table, this);
 			break;
 
 		case "salir":
