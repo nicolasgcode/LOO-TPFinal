@@ -55,10 +55,7 @@ public class ActionHandler {
 
 					((LibroTableModel) table.getModel()).fireTableDataChanged();
 
-				} else {
-					JOptionPane.showMessageDialog(ventana, "Error al cambiar estado del libro");
 				}
-
 			} else {
 				JOptionPane.showMessageDialog(ventana, "Por favor seleccione un libro");
 			}
@@ -101,7 +98,7 @@ public class ActionHandler {
 		ventanaPrestamos.setVisible(true);
 	}
 
-	public String getSelectedISBN(JTable table) {
+	public String getSelectedISBN(JTable table, JFrame ventana) {
 
 		String selectedISBN = "";
 
@@ -111,7 +108,7 @@ public class ActionHandler {
 
 		} catch (IndexOutOfBoundsException e) {
 
-			JOptionPane.showMessageDialog(null, "No ha seleccionado ningún libro");
+			JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningún libro");
 
 		}
 

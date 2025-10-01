@@ -33,7 +33,7 @@ public class VentanaLibros extends JFrame implements ActionListener {
 
 	private JPanel cargaBtnPanel = new JPanel();
 
-	JComboBox<EstadoLibro> comboEstado = new JComboBox<>(EstadoLibro.values());
+	JComboBox<EstadoLibro> comboEstado = new JComboBox<>();
 
 	private JTextField ISBNTxf = new JTextField();
 	private JTextField tituloTxf = new JTextField();
@@ -76,8 +76,9 @@ public class VentanaLibros extends JFrame implements ActionListener {
 		} else if (usuario instanceof Bibliotecario) {
 
 			libros = RepositorioLibros.getLibros();
-			cargaBtnPanel.setLayout(new FlowLayout());
 			Factory.newLabel(cargaBtnPanel, "Estado");
+			comboEstado.addItem(EstadoLibro.DISPONIBLE);
+			comboEstado.addItem(EstadoLibro.NO_DISPONIBLE);
 			cargaBtnPanel.add(comboEstado);
 			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Modificar libro", "modificarlibro", this));
 			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Salir", "salir", this));
@@ -145,7 +146,7 @@ public class VentanaLibros extends JFrame implements ActionListener {
 
 		switch (command) {
 		case "realizarprestamo":
-			handler.RealizarPrestamo(usuario, handler.getSelectedISBN(table), table, this);
+			handler.RealizarPrestamo(usuario, handler.getSelectedISBN(table, this), table, this);
 
 			break;
 
@@ -155,8 +156,8 @@ public class VentanaLibros extends JFrame implements ActionListener {
 			break;
 
 		case "modificarlibro":
-			handler.ModificarLibro(usuario, handler.getSelectedISBN(table), (EstadoLibro) comboEstado.getSelectedItem(),
-					table, this);
+			handler.ModificarLibro(usuario, handler.getSelectedISBN(table, this),
+					(EstadoLibro) comboEstado.getSelectedItem(), table, this);
 			break;
 
 		case "salir":
