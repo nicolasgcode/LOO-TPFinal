@@ -46,4 +46,19 @@ public class RepositorioUsuarios {
 
 	}
 
+	public static Usuario getUserByMail(String mail) {
+
+		for (Usuario usuario : users) {
+
+			if (usuario.getMail().equals(mail)) {
+
+				return usuario;
+
+			}
+
+		}
+
+		return null;
+	}
+
 }

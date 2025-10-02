@@ -79,6 +79,41 @@ public class Bibliotecario extends Usuario {
 
 	}
 
+	public boolean finalizarPrestamo(String mail, String estado, JFrame ventana) {
+
+		boolean success = false;
+
+		if (mail != "") {
+
+			Usuario usuario = RepositorioUsuarios.getUserByMail(mail);
+
+			if (usuario != null) {
+
+				Prestamo prestamo = RepositorioPrestamos.getPrestamoDelUsuario(usuario);
+
+				if (prestamo != null) {
+
+					Libro libro = prestamo.getLibro();
+					prestamo.setEstado(estado);
+					libro.setEstado(EstadoLibro.DISPONIBLE);
+
+					success = true;
+
+				} else {
+					JOptionPane.showMessageDialog(ventana,
+							"No se ha encontrado un prestamo en curso para dicho usuario");
+				}
+
+			} else {
+				JOptionPane.showMessageDialog(ventana, "Usuario con mail: " + mail + "no encontrado");
+			}
+
+		}
+
+		return success;
+
+	}
+
 //	public void gestionarUsuario() {
 //
 //	}

@@ -9,12 +9,14 @@ public class Prestamo {
 	private Libro libro;
 	private String fechaInicio;
 	private String fechaFin;
+	private String estado;
 
 	public Prestamo(Usuario usuario, Libro libro) {
 		this.usuario = usuario;
 		this.libro = libro;
 		this.fechaInicio = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		this.fechaFin = LocalDate.now().plusDays(7).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		this.estado = "En curso";
 	}
 
 	public Usuario getUsuario() {
@@ -41,8 +43,16 @@ public class Prestamo {
 		return fechaFin;
 	}
 
+	public String getEstado() {
+		return estado;
+	}
+
 	public void setFechaInicio(String fechaInicio) {
 		this.fechaInicio = fechaInicio;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 }

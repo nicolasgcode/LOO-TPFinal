@@ -44,6 +44,29 @@ public class ActionHandler {
 
 	}
 
+	public void filtrarPrestamos(JTable table) {
+
+		table.setModel(new PrestamoTableModel(RepositorioPrestamos.getPrestamosEnCurso()));
+
+	}
+
+	public void finalizarPrestamo(Usuario usuario, String mail, String estado, JTable table, JFrame ventana) {
+		if (usuario instanceof Bibliotecario bibliotecario) {
+
+			if (mail != "") {
+
+				boolean success = bibliotecario.finalizarPrestamo(mail, estado, ventana);
+
+				if (success) {
+
+					((PrestamoTableModel) table.getModel()).fireTableDataChanged();
+
+				}
+			}
+
+		}
+	}
+
 	public void ModificarLibro(Usuario usuario, String ISBN, EstadoLibro estado, JTable table, JFrame ventana) {
 		if (usuario instanceof Bibliotecario bibliotecario) {
 
@@ -113,6 +136,25 @@ public class ActionHandler {
 		}
 
 		return selectedISBN;
+
+	}
+
+	public String getSelectedMail(JTable table, JFrame ventana) {
+
+		String selectedMail = "";
+
+		try {
+
+			selectedMail = table.getModel().getValueAt(table.getSelectedRow(), 1).toString();
+			System.out.println(selectedMail);
+
+		} catch (IndexOutOfBoundsException e) {
+
+			JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningún préstamo");
+
+		}
+
+		return selectedMail;
 
 	}
 
