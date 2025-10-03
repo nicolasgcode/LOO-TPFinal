@@ -59,7 +59,7 @@ public class ActionHandler {
 
 				if (success) {
 
-					((PrestamoTableModel) table.getModel()).fireTableDataChanged();
+					filtrarPrestamos(table);
 
 				}
 			}
@@ -119,6 +119,13 @@ public class ActionHandler {
 		VentanaPrestamos ventanaPrestamos = new VentanaPrestamos(usuario, ventana);
 		ventana.setVisible(false);
 		ventanaPrestamos.setVisible(true);
+	}
+
+	public void CreateVentanaUsuarios(JFrame ventana, Usuario usuario) {
+
+		VentanaUsuarios ventanaUsuarios = new VentanaUsuarios(usuario, ventana);
+		ventana.setVisible(false);
+		ventanaUsuarios.setVisible(true);
 	}
 
 	public String getSelectedISBN(JTable table, JFrame ventana) {

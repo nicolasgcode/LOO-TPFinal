@@ -86,7 +86,20 @@ public class VentanaLibros extends JFrame implements ActionListener {
 		}
 
 		TableModel tableModel = new LibroTableModel(libros);
-		table = new JTable(tableModel);
+		table = new JTable(tableModel) {
+			@Override
+			public String getToolTipText(java.awt.event.MouseEvent e) {
+				java.awt.Point p = e.getPoint();
+				int rowIndex = rowAtPoint(p);
+				int colIndex = columnAtPoint(p);
+
+				if (colIndex == 1 && rowIndex >= 0) {
+					Object value = getValueAt(rowIndex, colIndex);
+					return value != null ? value.toString() : null;
+				}
+				return null;
+			}
+		};
 
 		JScrollPane scrollPane = new JScrollPane(table);
 

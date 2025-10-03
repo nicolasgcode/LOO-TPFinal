@@ -97,6 +97,8 @@ public class Bibliotecario extends Usuario {
 					prestamo.setEstado(estado);
 					libro.setEstado(EstadoLibro.DISPONIBLE);
 
+					JOptionPane.showMessageDialog(ventana, "Operación realizada con éxito");
+
 					success = true;
 
 				} else {

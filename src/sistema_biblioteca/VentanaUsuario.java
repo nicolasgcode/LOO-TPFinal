@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
 public class VentanaUsuario extends JFrame implements ActionListener {
 
@@ -20,9 +21,11 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 	JPanel panelTitulo = new JPanel();
 	JPanel panelSalir = new JPanel();
 	JPanel panelUsuario = new JPanel();
+	JPanel panelUsuarios = new JPanel(new BorderLayout());
 	JPanel menuUsuario = new JPanel();
 	JPanel panelBibliotecario = new JPanel();
 	JPanel menuBibliotecario = new JPanel();
+	JTable table = new JTable();
 	private JFrame ventana = new JFrame();
 
 	private ActionHandler handler = new ActionHandler();
@@ -30,7 +33,7 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 	public VentanaUsuario(Usuario usuario, JFrame ventana) {
 		this.ventana = ventana;
 		this.usuario = usuario;
-		setSize(400, 300);
+		setSize(400, 350);
 		setTitle("Panel de usuario");
 		setLocationRelativeTo(ventana);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -56,6 +59,7 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 		panelUsuario.setLayout(new BorderLayout(10, 50));
 		menuUsuario.setLayout(new GridLayout(2, 1, 10, 10));
 		Factory.newButton(menuUsuario, "Consultar y alquilar libros", "getlibros", this);
+		Factory.newButton(menuUsuario, "Mis prestamos", "misprestamos", this);
 
 		Factory.newButton(panelSalir, "Salir", "salir", this);
 
@@ -64,10 +68,11 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 		panelUsuario.add(menuUsuario, BorderLayout.CENTER);
 
 		panelBibliotecario.setLayout(new BorderLayout(10, 50));
-		menuBibliotecario.setLayout(new GridLayout(3, 1, 10, 10));
+		menuBibliotecario.setLayout(new GridLayout(4, 1, 10, 10));
 		Factory.newButton(menuBibliotecario, "Prestamos realizados", "getprestamos", this);
 		Factory.newButton(menuBibliotecario, "Cargar Libro", "createlibro", this);
 		Factory.newButton(menuBibliotecario, "Modificar Libro", "updatelibro", this);
+		Factory.newButton(menuBibliotecario, "Gestionar usuarios", "gestionusuarios", this);
 
 		panelBibliotecario.add(Factory.newPanel(), BorderLayout.EAST);
 		panelBibliotecario.add(Factory.newPanel(), BorderLayout.WEST);
@@ -109,8 +114,14 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 
 			break;
 		case "getprestamos":
+		case "misprestamos":
 
 			handler.CreateVentanaPrestamos(this, usuario);
+
+			break;
+
+		case "gestionusuarios":
+			handler.CreateVentanaUsuarios(this, usuario);
 
 			break;
 		case "salir":

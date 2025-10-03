@@ -5,6 +5,7 @@ import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -26,6 +27,7 @@ public class VentanaPrestamos extends JFrame implements ActionListener {
 	private JPanel botonesContainer = new JPanel(new CardLayout());
 	private CardLayout botonesLayout = (CardLayout) botonesContainer.getLayout();
 	private Usuario usuario;
+	List<Prestamo> prestamos = new ArrayList<Prestamo>();
 
 	private ActionHandler handler = new ActionHandler();
 
@@ -34,7 +36,7 @@ public class VentanaPrestamos extends JFrame implements ActionListener {
 		this.usuario = usuario;
 
 		setSize(400, 300);
-		setTitle("Panel de prestamos");
+
 		setLocationRelativeTo(ventana);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		showPanelPrestamos();
@@ -43,7 +45,15 @@ public class VentanaPrestamos extends JFrame implements ActionListener {
 
 	public void showPanelPrestamos() {
 
-		List<Prestamo> prestamos = RepositorioPrestamos.getPrestamos();
+		if (usuario instanceof Bibliotecario) {
+			setTitle("Panel de prestamos realizados");
+			prestamos = RepositorioPrestamos.getPrestamos();
+
+		} else {
+			setTitle("Panel mis prestamos");
+			prestamos = usuario.getPrestamos();
+			headerPanel.setVisible(false);
+		}
 
 		TableModel tableModel = new PrestamoTableModel(prestamos);
 		table = new JTable(tableModel);
@@ -87,6 +97,7 @@ public class VentanaPrestamos extends JFrame implements ActionListener {
 			if (estadoCombo.getSelectedItem().equals("En curso")) {
 				botonesLayout.show(botonesContainer, "modbtnpanel");
 			} else {
+				table.setModel(new PrestamoTableModel(prestamos));
 				botonesLayout.show(botonesContainer, "btnpanel");
 			}
 		} else if (e.getActionCommand().equals("finalizarprestamo")) {

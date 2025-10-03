@@ -33,21 +33,6 @@ public class UsuarioBasico extends Usuario {
 
 	}
 
-	public boolean tienePrestamoEnCurso() {
-
-		boolean tieneEnCurso = false;
-
-		for (Prestamo prestamo : getPrestamos()) {
-			if (prestamo.getEstado().equals("En curso")) {
-				tieneEnCurso = true;
-
-			}
-		}
-
-		return tieneEnCurso;
-
-	}
-
 	public boolean realizarPrestamo(String ISBN, Usuario usuario, JFrame ventana) {
 
 		boolean exito = false;
@@ -56,7 +41,7 @@ public class UsuarioBasico extends Usuario {
 
 		Prestamo prestamo = null;
 
-		boolean tieneEnCurso = tienePrestamoEnCurso();
+		boolean tieneEnCurso = RepositorioPrestamos.tienePrestamoEnCurso(usuario);
 
 		if (!tieneEnCurso) {
 

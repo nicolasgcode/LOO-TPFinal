@@ -43,4 +43,20 @@ public class RepositorioPrestamos {
 		}
 		return null;
 	}
+
+	public static boolean tienePrestamoEnCurso(Usuario usuario) {
+
+		boolean tieneEnCurso = false;
+
+		for (Prestamo prestamo : usuario.getPrestamos()) {
+			if (prestamo.getEstado().equals("En curso")) {
+				tieneEnCurso = true;
+
+			}
+		}
+
+		return tieneEnCurso;
+
+	}
+
 }
