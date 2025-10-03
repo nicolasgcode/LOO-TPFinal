@@ -33,7 +33,7 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 	public VentanaUsuario(Usuario usuario, JFrame ventana) {
 		this.ventana = ventana;
 		this.usuario = usuario;
-		setSize(400, 350);
+		setSize(400, 300);
 		setTitle("Panel de usuario");
 		setLocationRelativeTo(ventana);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -43,7 +43,7 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 
 	public VentanaUsuario(Usuario usuario) {
 		this.usuario = usuario;
-		setSize(400, 300);
+
 		setTitle("Panel de usuario");
 		setLocationRelativeTo(ventana);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -85,6 +85,7 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 		getContentPane().add(mainPanel);
 
 		if (usuario instanceof UsuarioBasico) {
+			setSize(400, 300);
 			Factory.newLabel(panelTitulo, "Bienvenido " + usuario.getNombre());
 			panelUsuario.add(panelTitulo, BorderLayout.NORTH);
 			panelUsuario.add(panelSalir, BorderLayout.SOUTH);
@@ -92,6 +93,7 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 			cardLayout.show(mainPanel, "panelusuario");
 
 		} else {
+			setSize(400, 350);
 			Factory.newLabel(panelTitulo, "Bienvenido " + usuario.getNombre() + " " + "[BIBLIOTECARIO]");
 			panelBibliotecario.add(panelTitulo, BorderLayout.NORTH);
 			panelBibliotecario.add(panelSalir, BorderLayout.SOUTH);

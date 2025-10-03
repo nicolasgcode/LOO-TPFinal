@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -92,10 +93,19 @@ public class VentanaPrestamos extends JFrame implements ActionListener {
 			handler.Salir(this, usuario);
 
 		} else if (e.getActionCommand().equals("filtrar")) {
-			handler.filtrarPrestamos(table);
+			boolean exito = handler.filtrarPrestamos(table);
 
 			if (estadoCombo.getSelectedItem().equals("En curso")) {
-				botonesLayout.show(botonesContainer, "modbtnpanel");
+				if (exito) {
+
+					System.out.println("hi");
+
+					botonesLayout.show(botonesContainer, "modbtnpanel");
+
+				} else {
+					JOptionPane.showMessageDialog(this, "No hay prestamos en curso");
+				}
+
 			} else {
 				table.setModel(new PrestamoTableModel(prestamos));
 				botonesLayout.show(botonesContainer, "btnpanel");

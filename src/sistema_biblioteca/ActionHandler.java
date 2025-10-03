@@ -44,9 +44,18 @@ public class ActionHandler {
 
 	}
 
-	public void filtrarPrestamos(JTable table) {
+	public boolean filtrarPrestamos(JTable table) {
 
-		table.setModel(new PrestamoTableModel(RepositorioPrestamos.getPrestamosEnCurso()));
+		boolean exito = false;
+
+		if (!RepositorioPrestamos.getPrestamosEnCurso().isEmpty()) {
+
+			table.setModel(new PrestamoTableModel(RepositorioPrestamos.getPrestamosEnCurso()));
+			exito = true;
+
+		}
+
+		return exito;
 
 	}
 
