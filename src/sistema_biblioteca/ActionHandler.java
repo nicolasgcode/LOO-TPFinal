@@ -81,17 +81,32 @@ public class ActionHandler {
 
 			if (ISBN != "") {
 
-				boolean success = bibliotecario.gestionarLibro(ISBN, estado, table, ventana);
+				boolean success = bibliotecario.gestionarLibro(ISBN, estado, ventana);
 
 				if (success) {
 
 					((LibroTableModel) table.getModel()).fireTableDataChanged();
 
 				}
-			} else {
-				JOptionPane.showMessageDialog(ventana, "Por favor seleccione un libro");
 			}
+		}
 
+	}
+
+	public void GestionarUsuario(Usuario usuario, String mail, JTable table, JFrame ventana) {
+
+		if (usuario instanceof Bibliotecario bibliotecario) {
+
+			if (mail != "") {
+
+				boolean success = bibliotecario.gestionarUsuario(mail, ventana);
+
+				if (success) {
+
+					((UserTableModel) table.getModel()).fireTableDataChanged();
+
+				}
+			}
 		}
 	}
 
@@ -155,7 +170,7 @@ public class ActionHandler {
 
 	}
 
-	public String getSelectedMail(JTable table, JFrame ventana) {
+	public String getSelectedPrestamo(JTable table, JFrame ventana) {
 
 		String selectedMail = "";
 
@@ -167,6 +182,25 @@ public class ActionHandler {
 		} catch (IndexOutOfBoundsException e) {
 
 			JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningún préstamo");
+
+		}
+
+		return selectedMail;
+
+	}
+
+	public String getSelectedUser(JTable table, JFrame ventana) {
+
+		String selectedMail = "";
+
+		try {
+
+			selectedMail = table.getModel().getValueAt(table.getSelectedRow(), 2).toString();
+			System.out.println(selectedMail);
+
+		} catch (IndexOutOfBoundsException e) {
+
+			JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningún usuario");
 
 		}
 

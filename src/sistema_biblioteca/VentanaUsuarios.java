@@ -1,14 +1,13 @@
 package sistema_biblioteca;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,13 +16,10 @@ import javax.swing.table.TableModel;
 public class VentanaUsuarios extends JFrame implements ActionListener {
 
 	ActionHandler handler = new ActionHandler();
-	private JPanel headerPanel = new JPanel();
-	private JPanel modBtnPanel = new JPanel();
 	JComboBox<String> estadoCombo = new JComboBox<String>();
-	private JPanel botonesContainer = new JPanel(new CardLayout());
 	private JTable table = new JTable();
-	private CardLayout botonesLayout = (CardLayout) botonesContainer.getLayout();
 	Usuario usuario;
+	private List<Usuario> usuarios = RepositorioUsuarios.getUsuarios();
 
 	public VentanaUsuarios(Usuario usuario, JFrame ventana) {
 		this.usuario = usuario;
@@ -37,7 +33,7 @@ public class VentanaUsuarios extends JFrame implements ActionListener {
 
 	public void showUsersPanel() {
 
-		TableModel tableModel = new UserTableModel(RepositorioUsuarios.getUsuarios());
+		TableModel tableModel = new UserTableModel(usuarios);
 
 		JTable table = new JTable(tableModel) {
 			@Override
@@ -56,30 +52,16 @@ public class VentanaUsuarios extends JFrame implements ActionListener {
 
 		this.table = table;
 
-		headerPanel.setLayout(new FlowLayout());
-		Factory.newLabel(headerPanel, "Filtrar por:");
-		estadoCombo.addItem("Todos");
-		estadoCombo.addItem("Activo");
-
-		headerPanel.add(estadoCombo);
-
-		Factory.newButton(headerPanel, "Filtrar", "filtrar", this);
-
 		JScrollPane scrollPane = new JScrollPane(table);
 		JPanel panelUsuarios = new JPanel(new BorderLayout());
 		JPanel btnPanel = new JPanel(new FlowLayout());
 
+		btnPanel.add(Factory.newButton(btnPanel, "Activar/Desactivar", "gestionarusuario", this));
+
 		btnPanel.add(Factory.newButton(btnPanel, "Salir", "salir", this));
-		modBtnPanel.add(Factory.newButton(modBtnPanel, "Finalizar", "finalizarprestamo", this));
-		modBtnPanel.add(Factory.newButton(modBtnPanel, "Salir", "salir", this));
 
-		botonesContainer.add(btnPanel, "btnpanel");
-		botonesContainer.add(modBtnPanel, "modbtnpanel");
-
-		Factory.newButton(btnPanel, "Salir", "salir", this);
-		panelUsuarios.add(headerPanel, BorderLayout.NORTH);
 		panelUsuarios.add(scrollPane, BorderLayout.CENTER);
-		panelUsuarios.add(botonesContainer, BorderLayout.SOUTH);
+		panelUsuarios.add(btnPanel, BorderLayout.SOUTH);
 
 		this.getContentPane().add(panelUsuarios);
 	}
@@ -90,25 +72,9 @@ public class VentanaUsuarios extends JFrame implements ActionListener {
 
 			handler.Salir(this, usuario);
 
-		} else if (e.getActionCommand().equals("filtrar")) {
+		} else if (e.getActionCommand().equals("gestionarusuario")) {
 
-			boolean exito = handler.filtrarUsuarios(table);
-
-			if (estadoCombo.getSelectedItem().equals("En curso")) {
-				if (exito) {
-
-					System.out.println("hi");
-
-					botonesLayout.show(botonesContainer, "modbtnpanel");
-
-				} else {
-					JOptionPane.showMessageDialog(this, "No hay usuarios activos");
-				}
-
-			} else {
-				table.setModel(new UserTableModel(usuarios));
-				botonesLayout.show(botonesContainer, "btnpanel");
-			}
+			handler.GestionarUsuario(usuario, handler.getSelectedUser(table, this), table, this);
 
 		}
 

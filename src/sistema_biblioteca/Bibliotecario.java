@@ -2,7 +2,6 @@ package sistema_biblioteca;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 
 public class Bibliotecario extends Usuario {
 
@@ -46,7 +45,7 @@ public class Bibliotecario extends Usuario {
 
 	}
 
-	public boolean gestionarLibro(String ISBN, EstadoLibro estado, JTable table, JFrame ventana) {
+	public boolean gestionarLibro(String ISBN, EstadoLibro estado, JFrame ventana) {
 
 		boolean success = false;
 
@@ -116,8 +115,35 @@ public class Bibliotecario extends Usuario {
 
 	}
 
-//	public void gestionarUsuario() {
-//
-//	}
+	public boolean gestionarUsuario(String mail, JFrame ventana) {
+
+		Usuario usuario = RepositorioUsuarios.getUserByMail(mail);
+		boolean exito = false;
+
+		if (usuario != null) {
+
+			if (usuario.getEstado().equalsIgnoreCase("Activo")) {
+
+				exito = true;
+
+				usuario.setEstado("Desactivado");
+				JOptionPane.showMessageDialog(ventana, "Usuario desactivado con éxito", "Operación",
+						JOptionPane.INFORMATION_MESSAGE);
+
+			} else if (usuario.getEstado().equalsIgnoreCase("Desactivado")) {
+				exito = true;
+				usuario.setEstado("Activo");
+				JOptionPane.showMessageDialog(ventana, "Usuario activado con éxito", "Operación",
+						JOptionPane.INFORMATION_MESSAGE);
+
+			}
+
+		} else {
+			JOptionPane.showMessageDialog(ventana, "Usuario no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+
+		return exito;
+
+	}
 
 }

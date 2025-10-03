@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -25,6 +26,9 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 	JPanel menuUsuario = new JPanel();
 	JPanel panelBibliotecario = new JPanel();
 	JPanel menuBibliotecario = new JPanel();
+
+	JButton btnAlquilar = Factory.newButton(menuUsuario, "Consultar y alquilar libros", "getlibros", this);
+
 	JTable table = new JTable();
 	private JFrame ventana = new JFrame();
 
@@ -58,7 +62,11 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 
 		panelUsuario.setLayout(new BorderLayout(10, 50));
 		menuUsuario.setLayout(new GridLayout(2, 1, 10, 10));
-		Factory.newButton(menuUsuario, "Consultar y alquilar libros", "getlibros", this);
+
+		if (usuario instanceof UsuarioBasico) {
+
+		}
+
 		Factory.newButton(menuUsuario, "Mis prestamos", "misprestamos", this);
 
 		Factory.newButton(panelSalir, "Salir", "salir", this);
@@ -85,8 +93,20 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 		getContentPane().add(mainPanel);
 
 		if (usuario instanceof UsuarioBasico) {
+
+			if (usuario.getEstado().equalsIgnoreCase("Activo")) {
+
+				btnAlquilar.setEnabled(true);
+				Factory.newLabel(panelTitulo, "Bienvenido " + usuario.getNombre());
+
+			} else if (usuario.getEstado().equalsIgnoreCase("Desactivado")) {
+
+				btnAlquilar.setEnabled(false);
+				Factory.newLabel(panelTitulo, "Bienvenido " + usuario.getNombre() + " " + "[Desactivado]");
+
+			}
 			setSize(400, 300);
-			Factory.newLabel(panelTitulo, "Bienvenido " + usuario.getNombre());
+
 			panelUsuario.add(panelTitulo, BorderLayout.NORTH);
 			panelUsuario.add(panelSalir, BorderLayout.SOUTH);
 

@@ -112,7 +112,7 @@ public class VentanaPrestamos extends JFrame implements ActionListener {
 			}
 		} else if (e.getActionCommand().equals("finalizarprestamo")) {
 
-			handler.finalizarPrestamo(usuario, handler.getSelectedMail(table, this), "Finalizado", table, this);
+			handler.finalizarPrestamo(usuario, handler.getSelectedPrestamo(table, this), "Finalizado", table, this);
 
 		}
 
