@@ -98,8 +98,6 @@ public class VentanaPrestamos extends JFrame implements ActionListener {
 			if (estadoCombo.getSelectedItem().equals("En curso")) {
 				if (exito) {
 
-					System.out.println("hi");
-
 					botonesLayout.show(botonesContainer, "modbtnpanel");
 
 				} else {

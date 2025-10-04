@@ -25,7 +25,8 @@ public class ActionHandler {
 			}
 
 		} else {
-			JOptionPane.showMessageDialog(ventana, "No tienes permiso para cargar un libro");
+			JOptionPane.showMessageDialog(ventana, "No tienes permiso para cargar un libro", "Error",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -162,7 +163,8 @@ public class ActionHandler {
 
 		} catch (IndexOutOfBoundsException e) {
 
-			JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningún libro");
+			JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningún libro", "Error",
+					JOptionPane.ERROR_MESSAGE);
 
 		}
 
@@ -181,7 +183,8 @@ public class ActionHandler {
 
 		} catch (IndexOutOfBoundsException e) {
 
-			JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningún préstamo");
+			JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningún préstamo", "Error",
+					JOptionPane.ERROR_MESSAGE);
 
 		}
 
@@ -200,7 +203,8 @@ public class ActionHandler {
 
 		} catch (IndexOutOfBoundsException e) {
 
-			JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningún usuario");
+			JOptionPane.showMessageDialog(ventana, "No ha seleccionado ningún usuario", "Error",
+					JOptionPane.ERROR_MESSAGE);
 
 		}
 

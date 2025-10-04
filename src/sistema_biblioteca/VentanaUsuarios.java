@@ -56,7 +56,7 @@ public class VentanaUsuarios extends JFrame implements ActionListener {
 		JPanel panelUsuarios = new JPanel(new BorderLayout());
 		JPanel btnPanel = new JPanel(new FlowLayout());
 
-		btnPanel.add(Factory.newButton(btnPanel, "Activar/Desactivar", "gestionarusuario", this));
+		btnPanel.add(Factory.newButton(btnPanel, "Activar/Desactivar", "gestionar_usuario", this));
 
 		btnPanel.add(Factory.newButton(btnPanel, "Salir", "salir", this));
 
@@ -72,7 +72,7 @@ public class VentanaUsuarios extends JFrame implements ActionListener {
 
 			handler.Salir(this, usuario);
 
-		} else if (e.getActionCommand().equals("gestionarusuario")) {
+		} else if (e.getActionCommand().equals("gestionar_usuario")) {
 
 			handler.GestionarUsuario(usuario, handler.getSelectedUser(table, this), table, this);
 

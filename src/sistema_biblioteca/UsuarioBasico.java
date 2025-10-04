@@ -61,24 +61,27 @@ public class UsuarioBasico extends Usuario {
 
 						exito = true;
 
-						JOptionPane.showMessageDialog(ventana, "Prestamo realizado con éxito");
+						JOptionPane.showMessageDialog(ventana, "Prestamo realizado con éxito", "Operación",
+								JOptionPane.INFORMATION_MESSAGE);
 
 					} catch (Exception e) {
-						JOptionPane.showMessageDialog(ventana,
-								"Ha ocurrido un error al realizar el prestamo" + e.getMessage());
+						JOptionPane.showMessageDialog(ventana, "Error al realizar el prestamo", "Error",
+								JOptionPane.ERROR_MESSAGE);
 					}
 
 				} else {
 
-					JOptionPane.showMessageDialog(ventana, "El libro seleccionado no se encuentra disponible");
+					JOptionPane.showMessageDialog(ventana, "El libro seleccionado no se encuentra disponible", "Error",
+							JOptionPane.ERROR_MESSAGE);
 
 				}
 			} else {
-				JOptionPane.showMessageDialog(ventana, "Libro no encontrado");
+				JOptionPane.showMessageDialog(ventana, "Libro no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 
 		} else {
-			JOptionPane.showMessageDialog(ventana, "Usted ya se encuentra con un prestamo en curso");
+			JOptionPane.showMessageDialog(ventana, "Usted ya se encuentra con un prestamo en curso", "Error",
+					JOptionPane.ERROR_MESSAGE);
 
 		}
 

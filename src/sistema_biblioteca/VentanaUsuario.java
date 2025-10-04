@@ -27,7 +27,7 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 	JPanel panelBibliotecario = new JPanel();
 	JPanel menuBibliotecario = new JPanel();
 
-	JButton btnAlquilar = Factory.newButton(menuUsuario, "Consultar y alquilar libros", "getlibros", this);
+	JButton btnAlquilar = Factory.newButton(menuUsuario, "Consultar y alquilar libros", "get_libros", this);
 
 	JTable table = new JTable();
 	private JFrame ventana = new JFrame();
@@ -67,7 +67,7 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 
 		}
 
-		Factory.newButton(menuUsuario, "Mis prestamos", "misprestamos", this);
+		Factory.newButton(menuUsuario, "Mis prestamos", "mis_prestamos", this);
 
 		Factory.newButton(panelSalir, "Salir", "salir", this);
 
@@ -77,10 +77,10 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 
 		panelBibliotecario.setLayout(new BorderLayout(10, 50));
 		menuBibliotecario.setLayout(new GridLayout(4, 1, 10, 10));
-		Factory.newButton(menuBibliotecario, "Prestamos realizados", "getprestamos", this);
-		Factory.newButton(menuBibliotecario, "Cargar Libro", "createlibro", this);
-		Factory.newButton(menuBibliotecario, "Modificar Libro", "updatelibro", this);
-		Factory.newButton(menuBibliotecario, "Gestionar usuarios", "gestionusuarios", this);
+		Factory.newButton(menuBibliotecario, "Prestamos realizados", "get_prestamos", this);
+		Factory.newButton(menuBibliotecario, "Cargar Libro", "create_libro", this);
+		Factory.newButton(menuBibliotecario, "Modificar Libro", "update_libro", this);
+		Factory.newButton(menuBibliotecario, "Gestionar usuarios", "gestion_usuarios", this);
 
 		panelBibliotecario.add(Factory.newPanel(), BorderLayout.EAST);
 		panelBibliotecario.add(Factory.newPanel(), BorderLayout.WEST);
@@ -128,21 +128,21 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 		String command = e.getActionCommand();
 
 		switch (command) {
-		case "getlibros":
-		case "createlibro":
-		case "updatelibro":
+		case "get_libros":
+		case "create_libro":
+		case "update_libro":
 
 			handler.CreateVentanaLibros(this, usuario, command);
 
 			break;
-		case "getprestamos":
-		case "misprestamos":
+		case "get_prestamos":
+		case "mis_prestamos":
 
 			handler.CreateVentanaPrestamos(this, usuario);
 
 			break;
 
-		case "gestionusuarios":
+		case "gestion_usuarios":
 			handler.CreateVentanaUsuarios(this, usuario);
 
 			break;

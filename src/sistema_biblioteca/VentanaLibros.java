@@ -44,13 +44,13 @@ public class VentanaLibros extends JFrame implements ActionListener {
 	public VentanaLibros(Usuario usuario, String command, JFrame ventana) {
 		this.usuario = usuario;
 		setTitle("Panel de libros");
-		if (command.equals("getlibros") || command.equals("updatelibro")) {
+		if (command.equals("get_libros") || command.equals("update_libro")) {
 
 			setSize(520, 300);
 
 			showPanelLibros();
 
-		} else if (command.equals("createlibro")) {
+		} else if (command.equals("create_libro")) {
 
 			setSize(400, 300);
 
@@ -70,7 +70,7 @@ public class VentanaLibros extends JFrame implements ActionListener {
 
 			libros = usuario.consultarLibrosDisp();
 
-			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Realizar prestamo", "realizarprestamo", this));
+			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Realizar prestamo", "realizar_prestamo", this));
 			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Salir", "salir", this));
 
 		} else if (usuario instanceof Bibliotecario) {
@@ -80,7 +80,7 @@ public class VentanaLibros extends JFrame implements ActionListener {
 			comboEstado.addItem(EstadoLibro.DISPONIBLE);
 			comboEstado.addItem(EstadoLibro.NO_DISPONIBLE);
 			cargaBtnPanel.add(comboEstado);
-			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Modificar libro", "modificarlibro", this));
+			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Modificar libro", "modificar_libro", this));
 			cargaBtnPanel.add(Factory.newButton(cargaBtnPanel, "Salir", "salir", this));
 
 		}
@@ -158,7 +158,7 @@ public class VentanaLibros extends JFrame implements ActionListener {
 		String command = e.getActionCommand();
 
 		switch (command) {
-		case "realizarprestamo":
+		case "realizar_prestamo":
 			handler.RealizarPrestamo(usuario, handler.getSelectedISBN(table, this), table, this);
 
 			break;
@@ -168,7 +168,7 @@ public class VentanaLibros extends JFrame implements ActionListener {
 					edicionTxf.getText(), this);
 			break;
 
-		case "modificarlibro":
+		case "modificar_libro":
 			handler.ModificarLibro(usuario, handler.getSelectedISBN(table, this),
 					(EstadoLibro) comboEstado.getSelectedItem(), table, this);
 			break;

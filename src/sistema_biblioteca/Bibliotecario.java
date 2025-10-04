@@ -29,14 +29,17 @@ public class Bibliotecario extends Usuario {
 
 						RepositorioLibros.getLibros().add(nuevoLibro);
 						exito = true;
-						JOptionPane.showMessageDialog(ventana, "Libro cargado con éxito");
+						JOptionPane.showMessageDialog(ventana, "Libro cargado con éxito", "Operación",
+								JOptionPane.INFORMATION_MESSAGE);
 
 					} catch (Exception e) {
-						JOptionPane.showMessageDialog(ventana, "Error al cargar el libro" + e.getMessage());
+						JOptionPane.showMessageDialog(ventana, "Error al cargar el libro", "Error",
+								JOptionPane.ERROR_MESSAGE);
 					}
 
 				} else {
-					JOptionPane.showMessageDialog(ventana, "Se ha alcanzado la cantidad máxima de libros");
+					JOptionPane.showMessageDialog(ventana, "Se ha alcanzado la cantidad máxima de libros", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}
@@ -47,7 +50,7 @@ public class Bibliotecario extends Usuario {
 
 	public boolean gestionarLibro(String ISBN, EstadoLibro estado, JFrame ventana) {
 
-		boolean success = false;
+		boolean exito = false;
 
 		Libro libro = RepositorioLibros.getLibroByISBN(ISBN);
 
@@ -55,8 +58,9 @@ public class Bibliotecario extends Usuario {
 			if (!libro.getEstado().equals(EstadoLibro.PRESTADO)) {
 				if (!libro.getEstado().equals(estado)) {
 					libro.setEstado(estado);
-					JOptionPane.showMessageDialog(ventana, "Operación realizada con éxito");
-					success = true;
+					JOptionPane.showMessageDialog(ventana, "Operación realizada con éxito", "Operación",
+							JOptionPane.INFORMATION_MESSAGE);
+					exito = true;
 
 				} else {
 					JOptionPane.showMessageDialog(ventana, "El libro ya está en ese estado", "Error",
@@ -64,23 +68,23 @@ public class Bibliotecario extends Usuario {
 				}
 
 			} else {
-				JOptionPane.showMessageDialog(ventana, "El libro se encuentra prestado", "Error al cambiar estado",
+				JOptionPane.showMessageDialog(ventana, "El libro se encuentra prestado", "Error",
 						JOptionPane.ERROR_MESSAGE);
 			}
 
 		} else {
 
-			JOptionPane.showMessageDialog(ventana, "Libro no encontrado");
+			JOptionPane.showMessageDialog(ventana, "Libro no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
 
 		}
 
-		return success;
+		return exito;
 
 	}
 
 	public boolean finalizarPrestamo(String mail, String estado, JFrame ventana) {
 
-		boolean success = false;
+		boolean exito = false;
 
 		if (mail != "") {
 
@@ -96,22 +100,25 @@ public class Bibliotecario extends Usuario {
 					prestamo.setEstado(estado);
 					libro.setEstado(EstadoLibro.DISPONIBLE);
 
-					JOptionPane.showMessageDialog(ventana, "Operación realizada con éxito");
+					JOptionPane.showMessageDialog(ventana, "Prestamo finalizado con éxito", "Operación",
+							JOptionPane.INFORMATION_MESSAGE);
 
-					success = true;
+					exito = true;
 
 				} else {
 					JOptionPane.showMessageDialog(ventana,
-							"No se ha encontrado un prestamo en curso para dicho usuario");
+							"No se ha encontrado un prestamo en curso para dicho usuario", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 
 			} else {
-				JOptionPane.showMessageDialog(ventana, "Usuario con mail: " + mail + "no encontrado");
+				JOptionPane.showMessageDialog(ventana, "Usuario con mail: " + mail + "no encontrado", "Error",
+						JOptionPane.ERROR_MESSAGE);
 			}
 
 		}
 
-		return success;
+		return exito;
 
 	}
 

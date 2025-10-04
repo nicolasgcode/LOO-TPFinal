@@ -46,42 +46,6 @@ public class RepositorioUsuarios {
 
 	}
 
-	public static List<Usuario> getActivos() {
-
-		List<Usuario> usuariosActivos = new ArrayList<Usuario>();
-
-		for (Usuario usuario : getUsuarios()) {
-
-			if (usuario.getEstado().equalsIgnoreCase("Activo")) {
-
-				usuariosActivos.add(usuario);
-
-			}
-
-		}
-
-		return usuariosActivos;
-
-	}
-
-	public static List<Usuario> getDesactivados() {
-
-		List<Usuario> usuariosDesactivados = new ArrayList<Usuario>();
-
-		for (Usuario usuario : getUsuarios()) {
-
-			if (usuario.getEstado().equalsIgnoreCase("Desactivado")) {
-
-				usuariosDesactivados.add(usuario);
-
-			}
-
-		}
-
-		return usuariosDesactivados;
-
-	}
-
 	public static Usuario getUserByMail(String mail) {
 
 		for (Usuario usuario : users) {
