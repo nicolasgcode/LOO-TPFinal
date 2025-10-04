@@ -10,7 +10,6 @@ import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -74,7 +73,7 @@ public class VentanaPrestamos extends JFrame implements ActionListener {
 		btnPanel.setLayout(new FlowLayout());
 		prestamosPanel.add(scrollPane, BorderLayout.CENTER);
 		btnPanel.add(Factory.newButton(btnPanel, "Salir", "salir", this));
-		modBtnPanel.add(Factory.newButton(modBtnPanel, "Finalizar", "finalizarprestamo", this));
+		modBtnPanel.add(Factory.newButton(modBtnPanel, "Finalizar", "finalizar_prestamo", this));
 		modBtnPanel.add(Factory.newButton(modBtnPanel, "Salir", "salir", this));
 
 		botonesContainer.add(btnPanel, "btnpanel");
@@ -88,30 +87,29 @@ public class VentanaPrestamos extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("salir")) {
 
-			handler.Salir(this, usuario);
+		String command = e.getActionCommand();
 
-		} else if (e.getActionCommand().equals("filtrar")) {
-			boolean exito = handler.filtrarPrestamos(table);
-
-			if (estadoCombo.getSelectedItem().equals("En curso")) {
-				if (exito) {
-
-					botonesLayout.show(botonesContainer, "modbtnpanel");
-
-				} else {
-					JOptionPane.showMessageDialog(this, "No hay prestamos en curso");
-				}
-
-			} else {
-				table.setModel(new PrestamoTableModel(prestamos));
-				botonesLayout.show(botonesContainer, "btnpanel");
-			}
-		} else if (e.getActionCommand().equals("finalizarprestamo")) {
+		switch (command) {
+		case "finalizar_prestamo":
 
 			handler.finalizarPrestamo(usuario, handler.getSelectedPrestamo(table, this), "Finalizado", table, this);
 
+			break;
+
+		case "filtrar":
+			handler.mostrarPrestamos(table, (String) estadoCombo.getSelectedItem(), botonesLayout, botonesContainer,
+					prestamos, this);
+			break;
+
+		case "salir":
+
+			handler.Salir(this, usuario);
+
+			break;
+
+		default:
+			break;
 		}
 
 	}

@@ -68,14 +68,21 @@ public class VentanaUsuarios extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("salir")) {
+		String command = e.getActionCommand();
 
-			handler.Salir(this, usuario);
-
-		} else if (e.getActionCommand().equals("gestionar_usuario")) {
-
+		switch (command) {
+		case "gestionar_usuario":
 			handler.GestionarUsuario(usuario, handler.getSelectedUser(table, this), table, this);
 
+			break;
+
+		case "salir":
+			handler.Salir(this, usuario);
+
+			break;
+
+		default:
+			break;
 		}
 
 	}

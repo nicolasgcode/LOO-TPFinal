@@ -1,7 +1,11 @@
 package sistema_biblioteca;
 
+import java.awt.CardLayout;
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 
 public class ActionHandler {
@@ -74,6 +78,25 @@ public class ActionHandler {
 				}
 			}
 
+		}
+	}
+
+	public void mostrarPrestamos(JTable table, String selectedItem, CardLayout botonesLayout, JPanel botonesContainer,
+			List<Prestamo> prestamos, JFrame ventana) {
+		boolean exito = filtrarPrestamos(table);
+
+		if (selectedItem.equals("En curso")) {
+			if (exito) {
+
+				botonesLayout.show(botonesContainer, "modbtnpanel");
+
+			} else {
+				JOptionPane.showMessageDialog(ventana, "No hay prestamos en curso");
+			}
+
+		} else {
+			table.setModel(new PrestamoTableModel(prestamos));
+			botonesLayout.show(botonesContainer, "btnpanel");
 		}
 	}
 
