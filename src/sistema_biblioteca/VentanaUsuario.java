@@ -40,7 +40,7 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 		setSize(400, 300);
 		setTitle("Panel de usuario");
 		setLocationRelativeTo(ventana);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		showUserPanel(usuario);
 
 	}

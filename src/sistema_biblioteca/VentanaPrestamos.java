@@ -38,7 +38,7 @@ public class VentanaPrestamos extends JFrame implements ActionListener {
 		setSize(400, 300);
 
 		setLocationRelativeTo(ventana);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		showPanelPrestamos();
 
 	}

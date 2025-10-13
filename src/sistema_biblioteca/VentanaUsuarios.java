@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -19,19 +20,21 @@ public class VentanaUsuarios extends JFrame implements ActionListener {
 	JComboBox<String> estadoCombo = new JComboBox<String>();
 	private JTable table = new JTable();
 	Usuario usuario;
-	private List<Usuario> usuarios = RepositorioUsuarios.getUsuarios();
+	private List<Usuario> usuarios = new ArrayList<Usuario>();
 
 	public VentanaUsuarios(Usuario usuario, JFrame ventana) {
 		this.usuario = usuario;
 		setSize(400, 300);
 		setTitle("Panel de usuarios");
 		setLocationRelativeTo(ventana);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
 		showUsersPanel();
 
 	}
 
 	public void showUsersPanel() {
+		usuarios = RepositorioUsuarios.getUsuariosAGestionar(usuario);
 
 		TableModel tableModel = new UserTableModel(usuarios);
 

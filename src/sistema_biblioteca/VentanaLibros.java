@@ -58,7 +58,7 @@ public class VentanaLibros extends JFrame implements ActionListener {
 
 		}
 		setLocationRelativeTo(ventana);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
 	}
 

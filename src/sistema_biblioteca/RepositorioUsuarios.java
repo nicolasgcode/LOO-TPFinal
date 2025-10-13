@@ -14,6 +14,7 @@ public class RepositorioUsuarios {
 		users.add(new UsuarioBasico("Nicolás", "García", "contactnicolasgarcia@gmail.com", "usubas123", "Activo"));
 		users.add(new UsuarioBasico("Lourdes", "Alí", "lali@gmail.com", "usubas321", "Activo"));
 		users.add(new Bibliotecario("Nora", "Rodriguez", "noeli@gmail.com", "usubib456", "Activo"));
+
 	}
 
 	public static List<Usuario> getUsuarios() {
@@ -59,6 +60,24 @@ public class RepositorioUsuarios {
 		}
 
 		return null;
+	}
+
+	public static List<Usuario> getUsuariosAGestionar(Usuario usuario) {
+
+		List<Usuario> misUsuarios = new ArrayList<Usuario>();
+
+		for (Usuario user : getUsuarios()) {
+
+			if (!(user.equals(usuario))) {
+
+				misUsuarios.add(user);
+
+			}
+
+		}
+
+		return misUsuarios;
+
 	}
 
 }
